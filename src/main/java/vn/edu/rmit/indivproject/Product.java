@@ -60,7 +60,7 @@ public abstract class Product {
     public static void createNewProduct() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Choose product type: ");
+        System.out.print("Choose product type (Digital/Physical): ");
         String type;
         while (true) {
             type = scanner.nextLine();
@@ -116,24 +116,24 @@ public abstract class Product {
             }
         }
 
-        System.out.println("Can this product be used as a gift?");
+        System.out.println("Can this product be used as a gift? (Y/N)");
         String isGift;
         scanner.nextLine();
         while (true) {
             isGift = scanner.nextLine();
-            if (isGift.equals("Yes") || isGift.equals("No")) {
+            if (isGift.equals("Y") || isGift.equals("N")) {
                 break;
             }
             System.out.print("That is not a valid option. PLease try again: ");
         }
 
-        if (type.equals("Digital") && isGift.equals("No")) {
+        if (type.equals("Digital") && isGift.equals("N")) {
             DigitalProduct dp = new DigitalProduct(name, desc, quantity, price);
             catalogue.put(name, dp);
         } else if (type.equals("Digital")) {
             DigitalGift dg = new DigitalGift(name, desc, quantity, price);
             catalogue.put(name, dg);
-        } else if (isGift.equals("No")) {
+        } else if (isGift.equals("N")) {
             PhysicalProduct pp = new PhysicalProduct(name, desc, quantity, price, weight);
             catalogue.put(name, pp);
         } else {
@@ -152,7 +152,7 @@ public abstract class Product {
             System.out.println("No product with that name found.");
         } else {
             System.out.println("Product found: " + catalogue.get(name).toString());
-            System.out.println("What information do you want to edit?");
+            System.out.println("What information do you want to edit? (Descriptions/Quantity/Price/Weight)");
             String field = scanner.nextLine();
             switch (field) {
                 case "Name":

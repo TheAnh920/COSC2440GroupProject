@@ -72,15 +72,15 @@ public class ShoppingCart {
     public static void createNewCart() {
         Scanner scanner = new Scanner(System.in);
 //      Reminding the user to save their current cart
-        System.out.println("Any unsaved changes to your current cart will be lost. Continue?");
+        System.out.println("Any unsaved changes to your current cart will be lost. Continue? (Y/N)");
         String answer = scanner.nextLine();
         switch (answer) {
             default:
                 System.out.println("That is an invalid option.");
-            case "No":
+            case "N":
                 System.out.println("Action cancelled.");
                 break;
-            case "Yes":
+            case "Y":
                 ShoppingCart newCart = new ShoppingCart();
                 cartList.put(newCart.key, newCart);
 //              Change the active cart to the newly created cart
@@ -99,15 +99,15 @@ public class ShoppingCart {
     public static void changeCart() {
         Scanner scanner = new Scanner(System.in);
 //      Reminding the user to save their current cart
-        System.out.println("Any unsaved changes to your current cart will be lost. Continue?");
+        System.out.println("Any unsaved changes to your current cart will be lost. Continue? (Y/N)");
         String answer = scanner.nextLine();
         switch (answer) {
             default:
                 System.out.println("That is an invalid option.");
-            case "No":
+            case "N":
                 System.out.println("Action cancelled.");
                 break;
-            case "Yes":
+            case "Y":
                 System.out.print("Input cart key: ");
                 int tempKey = scanner.nextInt();
                 if (!cartList.containsKey(tempKey)) {
