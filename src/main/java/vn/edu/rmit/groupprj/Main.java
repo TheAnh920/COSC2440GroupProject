@@ -1,7 +1,7 @@
-package vn.edu.rmit.indivproject;
+package vn.edu.rmit.groupprj;
 
 /**
- * @author Nguyen The Anh - s3927195
+ * @author Group 21
  */
 
 import java.util.Scanner;

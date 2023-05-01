@@ -1,4 +1,4 @@
-package vn.edu.rmit.indivproject.Coupons;
+package vn.edu.rmit.groupprj.Coupons;
 
 public class Coupon {
     private String couponName;
