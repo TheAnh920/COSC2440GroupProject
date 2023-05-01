@@ -8,7 +8,7 @@ import java.util.*;
 
 public class ShoppingCart {
     static Map<Integer, ShoppingCart> cartList = new LinkedHashMap<>();
-    //  Count how many carts have been created
+    //  Static int to count how many carts have been created
     static int count = 0;
     //  Unique key for each cart
     private final Integer key;

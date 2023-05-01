@@ -59,7 +59,7 @@ public abstract class Product {
 
     public static void createNewProduct() {
         Scanner scanner = new Scanner(System.in);
-
+//      Ask user to choose a product type
         System.out.print("Choose product type (Digital/Physical): ");
         String type;
         while (true) {
@@ -69,21 +69,22 @@ public abstract class Product {
             }
             System.out.print("That is not a valid product type. Please try again: ");
         }
-
+//      Ask user to input the product's name
         System.out.print("Input product name: ");
         String name;
         while (true) {
             name = scanner.nextLine();
+//          Check for name duplicates
             boolean name_exists = catalogue.get(name) != null;
             if (!name_exists) {
                 break;
             }
             System.out.print("A product with that name already exists. Please try again: ");
         }
-
+//      Ask user to input the product's descriptions
         System.out.print("Input product descriptions: ");
         String desc = scanner.nextLine();
-
+//      Ask user to input the product's available quantity
         System.out.print("Input product quantity: ");
         int quantity;
         while (true) {
@@ -93,7 +94,7 @@ public abstract class Product {
             }
             System.out.print("That is not a valid quantity. Please try again: ");
         }
-
+//      Ask user to input the product's price
         System.out.print("Input product price: ");
         double price;
         while (true) {
@@ -103,7 +104,7 @@ public abstract class Product {
             }
             System.out.print("That is not a valid price. Please try again: ");
         }
-
+//      If the product is a physical product, ask user to input its weight
         double weight = 0;
         if (type.equals("Physical")) {
             System.out.print("Input product weight: ");
@@ -115,7 +116,7 @@ public abstract class Product {
                 System.out.print("That is not a valid weight. Please try again: ");
             }
         }
-
+//      Ask user if the product can be used as a gift
         System.out.println("Can this product be used as a gift? (Y/N)");
         String isGift;
         scanner.nextLine();
@@ -126,7 +127,7 @@ public abstract class Product {
             }
             System.out.print("That is not a valid option. PLease try again: ");
         }
-
+//      Put the new product into the catalogue
         if (type.equals("Digital") && isGift.equals("N")) {
             DigitalProduct dp = new DigitalProduct(name, desc, quantity, price);
             catalogue.put(name, dp);
@@ -145,13 +146,14 @@ public abstract class Product {
 
     public static void editProduct() {
         Scanner scanner = new Scanner(System.in);
-
+//      Ask user to input the name of the product to be edited
         System.out.print("Input product name: ");
         String name = scanner.nextLine();
         if (!catalogue.containsKey(name)) {
             System.out.println("No product with that name found.");
         } else {
             System.out.println("Product found: " + catalogue.get(name).toString());
+//          Edit the product's wanted attribute
             System.out.println("What information do you want to edit? (Descriptions/Quantity/Price/Weight)");
             String field = scanner.nextLine();
             switch (field) {
