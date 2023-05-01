@@ -64,7 +64,7 @@ public abstract class Product {
         String type;
         while (true) {
             type = scanner.nextLine();
-            if (type.equals("Digital") || type.equals("Physical")) {
+            if (type.equalsIgnoreCase("Digital") || type.equalsIgnoreCase("Physical")) {
                 break;
             }
             System.out.print("That is not a valid product type. Please try again: ");
@@ -106,7 +106,7 @@ public abstract class Product {
         }
 //      If the product is a physical product, ask user to input its weight
         double weight = 0;
-        if (type.equals("Physical")) {
+        if (type.equalsIgnoreCase("Physical")) {
             System.out.print("Input product weight: ");
             while (true) {
                 weight = scanner.nextDouble();
@@ -122,19 +122,19 @@ public abstract class Product {
         scanner.nextLine();
         while (true) {
             isGift = scanner.nextLine();
-            if (isGift.equals("Y") || isGift.equals("N")) {
+            if (isGift.equalsIgnoreCase("Y") || isGift.equalsIgnoreCase("N")) {
                 break;
             }
             System.out.print("That is not a valid option. PLease try again: ");
         }
 //      Put the new product into the catalogue
-        if (type.equals("Digital") && isGift.equals("N")) {
+        if (type.equalsIgnoreCase("Digital") && isGift.equalsIgnoreCase("N")) {
             DigitalProduct dp = new DigitalProduct(name, desc, quantity, price);
             catalogue.put(name, dp);
-        } else if (type.equals("Digital")) {
+        } else if (type.equalsIgnoreCase("Digital")) {
             DigitalGift dg = new DigitalGift(name, desc, quantity, price);
             catalogue.put(name, dg);
-        } else if (isGift.equals("N")) {
+        } else if (isGift.equalsIgnoreCase("N")) {
             PhysicalProduct pp = new PhysicalProduct(name, desc, quantity, price, weight);
             catalogue.put(name, pp);
         } else {
@@ -155,17 +155,17 @@ public abstract class Product {
             System.out.println("Product found: " + catalogue.get(name).toString());
 //          Edit the product's wanted attribute
             System.out.println("What information do you want to edit? (Descriptions/Quantity/Price/Weight)");
-            String field = scanner.nextLine();
+            String field = scanner.nextLine().toLowerCase();
             switch (field) {
-                case "Name":
+                case "name":
                     System.out.println("Cannot change product name.");
                     break;
-                case "Descriptions":
+                case "descriptions":
                     System.out.print("Input new descriptions: ");
                     catalogue.get(name).setpDesc(scanner.nextLine());
                     System.out.println("Product descriptions edited successfully!");
                     break;
-                case "Quantity":
+                case "quantity":
                     System.out.print("Input new quantity: ");
                     int quantity = scanner.nextInt();
                     if (quantity >= 0) {
@@ -175,7 +175,7 @@ public abstract class Product {
                         System.out.println("Invalid quantity.");
                     }
                     break;
-                case "Price":
+                case "price":
                     System.out.print("Input new price: ");
                     double price = scanner.nextDouble();
                     if (price >= 0) {
@@ -185,7 +185,7 @@ public abstract class Product {
                         System.out.println("Invalid price.");
                     }
                     break;
-                case "Weight":
+                case "weight":
                     if (catalogue.get(name).getType().equals("DIGITAL")) {
                         System.out.println("This is a digital product.");
                     } else if (catalogue.get(name).getType().equals("PHYSICAL")) {

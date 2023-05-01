@@ -37,6 +37,8 @@ public class Main {
                 break;
             }
             switch (option) {
+                default:
+                    System.out.println("Invalid command.");
                 case "1":
                     Product.displayAllProducts();
                     break;
