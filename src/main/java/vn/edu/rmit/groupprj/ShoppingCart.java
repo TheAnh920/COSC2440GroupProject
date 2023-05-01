@@ -70,54 +70,23 @@ public class ShoppingCart {
     }
 
     public static void createNewCart() {
-        Scanner scanner = new Scanner(System.in);
-//      Reminding the user to save their current cart
-        System.out.println("Any unsaved changes to your current cart will be lost. Continue? (Y/N)");
-        String answer = scanner.nextLine();
-        switch (answer) {
-            default:
-                System.out.println("That is an invalid option.");
-            case "N":
-                System.out.println("Action cancelled.");
-                break;
-            case "Y":
-                ShoppingCart newCart = new ShoppingCart();
-                cartList.put(newCart.key, newCart);
-//              Change the active cart to the newly created cart
-                Main.activeCart = newCart.key;
-                System.out.println("New shopping cart successfully created!");
-                break;
-        }
-    }
-
-    public boolean saveCart() {
-        cartList.put(key, this);
-        System.out.println("Cart " + key + " saved!");
-        return true;
+        ShoppingCart newCart = new ShoppingCart();
+        cartList.put(newCart.key, newCart);
+//      Change the active cart to the newly created cart
+        Main.activeCart = newCart.key;
+        System.out.println("New shopping cart successfully created! Cart key: " + newCart.key);
     }
 
     public static void changeCart() {
         Scanner scanner = new Scanner(System.in);
-//      Reminding the user to save their current cart
-        System.out.println("Any unsaved changes to your current cart will be lost. Continue? (Y/N)");
-        String answer = scanner.nextLine();
-        switch (answer) {
-            default:
-                System.out.println("That is an invalid option.");
-            case "N":
-                System.out.println("Action cancelled.");
-                break;
-            case "Y":
-                System.out.print("Input cart key: ");
-                int tempKey = scanner.nextInt();
-                if (!cartList.containsKey(tempKey)) {
-                    System.out.println("Cart not found.");
-                } else {
-//                  Change the active cart to the cart with the given key
-                    Main.activeCart = tempKey;
-                    System.out.println("Changed to cart " + tempKey + "!");
-                }
-                break;
+        System.out.print("Input cart key: ");
+        int tempKey = scanner.nextInt();
+        if (!cartList.containsKey(tempKey)) {
+            System.out.println("Cart not found.");
+        } else {
+//          Change the active cart to the cart with the given key
+            Main.activeCart = tempKey;
+            System.out.println("Changed to cart " + tempKey + "!");
         }
     }
 

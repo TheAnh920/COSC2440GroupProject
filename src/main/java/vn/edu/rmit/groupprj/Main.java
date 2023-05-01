@@ -26,12 +26,11 @@ public class Main {
             System.out.println("4. Add product to cart");
             System.out.println("5. Remove product from cart");
             System.out.println("6. Display cart total price");
-            System.out.println("7. Save current cart");
-            System.out.println("8. Create a new shopping cart");
-            System.out.println("9. Change cart");
-            System.out.println("10. Display all carts");
-            System.out.println("11. Create new product");
-            System.out.println("12. Edit a product");
+            System.out.println("7. Create a new shopping cart");
+            System.out.println("8. Change cart");
+            System.out.println("9. Display all carts");
+            System.out.println("10. Create new product");
+            System.out.println("11. Edit a product");
             System.out.println("0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -70,21 +69,18 @@ public class Main {
                             " is: " + ShoppingCart.cartList.get(activeCart).cartAmount());
                     break;
                 case "7":
-                    ShoppingCart.cartList.get(activeCart).saveCart();
-                    break;
-                case "8":
                     ShoppingCart.createNewCart();
                     break;
-                case "9":
+                case "8":
                     ShoppingCart.changeCart();
                     break;
-                case "10":
+                case "9":
                     ShoppingCart.displayAllCarts();
                     break;
-                case "11":
+                case "10":
                     Product.createNewProduct();
                     break;
-                case "12":
+                case "11":
                     Product.editProduct();
                     break;
             }

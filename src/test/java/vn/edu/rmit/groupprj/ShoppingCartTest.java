@@ -70,14 +70,6 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void saveCartTest() {
-        Product.catalogue.put("name", new DigitalProduct("name", "desc", 10, 10));
-        ShoppingCart sc = new ShoppingCart();
-        ShoppingCart.cartList.put(sc.getKey(), sc);
-        assertTrue(sc.saveCart());
-    }
-
-    @Test
     public void displayAllCartsTest() {
         Product.catalogue.put("name", new DigitalProduct("name", "desc", 10, 10));
         Product.catalogue.put("name2", new PhysicalProduct("name2", "desc", 10, 10, 15));
@@ -85,20 +77,16 @@ public class ShoppingCartTest {
         ShoppingCart sc = new ShoppingCart();
         ShoppingCart.cartList.put(sc.getKey(), sc);
         sc.addItem("name2");
-        sc.saveCart();
         ShoppingCart sc2 = new ShoppingCart();
         ShoppingCart.cartList.put(sc2.getKey(), sc2);
         sc2.addItem("name2");
         sc2.addItem("name3");
-        sc2.saveCart();
         ShoppingCart sc3 = new ShoppingCart();
         ShoppingCart.cartList.put(sc3.getKey(), sc3);
         sc3.addItem("name3");
-        sc3.saveCart();
         ShoppingCart sc4 = new ShoppingCart();
         ShoppingCart.cartList.put(sc4.getKey(), sc4);
         sc4.addItem("name");
-        sc4.saveCart();
         assertTrue(ShoppingCart.displayAllCarts());
     }
 }
