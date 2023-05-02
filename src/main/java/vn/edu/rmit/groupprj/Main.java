@@ -7,7 +7,7 @@ package vn.edu.rmit.groupprj;
 import java.util.Scanner;
 
 public class Main {
-//  Declare a static variable activeCart to indicate the cart the user is interacting with
+    //  Declare a static variable activeCart to indicate the cart the user is interacting with
     static int activeCart;
 
     public static void main(String[] args) {
@@ -52,12 +52,11 @@ public class Main {
                     System.out.print("Input product name: ");
                     String productName = scanner.nextLine();
                     System.out.print("Input product quantity: ");
-                    Integer productQuant = scanner.nextInt();
-                    if (ShoppingCart.cartList.get(activeCart).addItem(productName, productQuant)) {
-                        
+                    int productQuantity = scanner.nextInt();
+                    if (ShoppingCart.cartList.get(activeCart).addItem(productName, productQuantity)) {
                         System.out.println("Product added to cart successfully!");
                     } else {
-                        System.out.println("Failed, the selected product is out of stock, does not exist, or is already in your cart!");
+                        System.out.println("Failed, the selected product is out of stock or does not exist!");
                     }
                     scanner.nextLine();
                     break;
@@ -77,7 +76,9 @@ public class Main {
                     ShoppingCart.createNewCart();
                     break;
                 case "8":
-                    ShoppingCart.changeCart();
+                    System.out.print("Input cart key: ");
+                    int tempKey = scanner.nextInt();
+                    ShoppingCart.changeCart(tempKey);
                     break;
                 case "9":
                     ShoppingCart.displayAllCarts();

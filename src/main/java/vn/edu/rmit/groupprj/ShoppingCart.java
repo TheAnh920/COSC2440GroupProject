@@ -29,23 +29,24 @@ public class ShoppingCart {
         return weight;
     }
 
-    public boolean addItem(String productName, int productQuant) {
+    public boolean addItem(String name, int quantity) {
 //      Check if the product is present in the catalogue
-        if (!Product.catalogue.containsKey(productName)) {
+        if (!Product.catalogue.containsKey(name)) {
             return false;
         }
-//      Check if the product is still available
-        if (Product.catalogue.get(productName).getpQuantity() <= 0) {
+//      Check if the product is still in stock
+        if (Product.catalogue.get(name).getpQuantity() < quantity) {
             return false;
         }
-        if (cart.containsKey(Product.catalogue.get(productName))) {
-            return false;
+        Product.catalogue.get(name).setpQuantity(Product.catalogue.get(name).getpQuantity() - quantity);
+        if (!cart.containsKey(Product.catalogue.get(name))) {
+            cart.put(Product.catalogue.get(name), quantity);
+        } else {
+            cart.put(Product.catalogue.get(name), cart.get(Product.catalogue.get(name)) + quantity);
         }
-        Product.catalogue.get(productName).setpQuantity(Product.catalogue.get(productName).getpQuantity() - 1);
-        cart.put(Product.catalogue.get(productName), productQuant);
 //      If the added product is a physical product, add its weight to the total weight of the cart
-        if (Product.catalogue.get(productName).getType().equals("PHYSICAL")) {
-            weight += ((PhysicalProduct) Product.catalogue.get(productName)).getpWeight();
+        if (Product.catalogue.get(name).getType().equals("PHYSICAL")) {
+            weight += ((PhysicalProduct) Product.catalogue.get(name)).getpWeight() * quantity;
         }
         return true;
     }
@@ -65,11 +66,11 @@ public class ShoppingCart {
 
     public double cartAmount() {
         double price = 0;
-        for (Map.Entry<Product, Integer> pairEntry: cart.entrySet()) {
+        for (Map.Entry<Product, Integer> pairEntry : cart.entrySet()) {
             price += Product.catalogue.get(pairEntry.getKey().getpName()).getpPrice() * cart.get(pairEntry.getKey());
         }
 
-        
+
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }
 
@@ -81,16 +82,13 @@ public class ShoppingCart {
         System.out.println("New shopping cart successfully created! Cart key: " + newCart.key);
     }
 
-    public static void changeCart() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Input cart key: ");
-        int tempKey = scanner.nextInt();
-        if (!cartList.containsKey(tempKey)) {
+    public static void changeCart(int key) {
+        if (!cartList.containsKey(key)) {
             System.out.println("Cart not found.");
         } else {
 //          Change the active cart to the cart with the given key
-            Main.activeCart = tempKey;
-            System.out.println("Changed to cart " + tempKey + "!");
+            Main.activeCart = key;
+            System.out.println("Changed to cart " + key + "!");
         }
     }
 
