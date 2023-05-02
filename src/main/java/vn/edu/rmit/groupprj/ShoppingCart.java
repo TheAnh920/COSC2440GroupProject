@@ -30,13 +30,15 @@ public class ShoppingCart {
     }
 
     public boolean addItem(String productName, int productQuant) {
+//      Check if the product is present in the catalogue
         if (!Product.catalogue.containsKey(productName)) {
             return false;
         }
+//      Check if the product is still available
         if (Product.catalogue.get(productName).getpQuantity() <= 0) {
             return false;
         }
-        if (cart.containsKey(productName)) {
+        if (cart.containsKey(Product.catalogue.get(productName))) {
             return false;
         }
         Product.catalogue.get(productName).setpQuantity(Product.catalogue.get(productName).getpQuantity() - 1);
