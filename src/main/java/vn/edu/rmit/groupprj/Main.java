@@ -37,8 +37,6 @@ public class Main {
                 break;
             }
             switch (option) {
-                default:
-                    System.out.println("Invalid command.");
                 case "1":
                     Product.displayAllProducts();
                     break;
@@ -61,6 +59,7 @@ public class Main {
                     } else {
                         System.out.println("Failed, the selected product is out of stock, does not exist, or is already in your cart!");
                     }
+                    scanner.nextLine();
                     break;
                 case "5":
                     System.out.print("Input product name: ");
@@ -89,6 +88,8 @@ public class Main {
                 case "11":
                     Product.editProduct();
                     break;
+                default:
+                    System.out.println("Invalid command.");
             }
         }
     }
