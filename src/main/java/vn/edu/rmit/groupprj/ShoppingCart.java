@@ -12,7 +12,7 @@ public class ShoppingCart {
     static int count = 0;
     //  Unique key for each cart
     private final Integer key;
-    HashSet<String> cart = new HashSet<>();
+    Map<Product, Integer> cart = new HashMap<>();
     private double weight = 0;
 
     public ShoppingCart() {
@@ -29,18 +29,18 @@ public class ShoppingCart {
         return weight;
     }
 
-    public boolean addItem(String productName) {
+    public boolean addItem(String productName, int productQuant) {
         if (!Product.catalogue.containsKey(productName)) {
             return false;
         }
         if (Product.catalogue.get(productName).getpQuantity() <= 0) {
             return false;
         }
-        if (cart.contains(productName)) {
+        if (cart.containsKey(productName)) {
             return false;
         }
         Product.catalogue.get(productName).setpQuantity(Product.catalogue.get(productName).getpQuantity() - 1);
-        cart.add(Product.catalogue.get(productName).getpName());
+        cart.put(Product.catalogue.get(productName), productQuant);
 //      If the added product is a physical product, add its weight to the total weight of the cart
         if (Product.catalogue.get(productName).getType().equals("PHYSICAL")) {
             weight += ((PhysicalProduct) Product.catalogue.get(productName)).getpWeight();
@@ -49,7 +49,7 @@ public class ShoppingCart {
     }
 
     public boolean removeItem(String productName) {
-        if (!cart.contains(productName)) {
+        if (!cart.containsKey(productName)) {
             return false;
         }
         Product.catalogue.get(productName).setpQuantity(Product.catalogue.get(productName).getpQuantity() + 1);
@@ -63,9 +63,11 @@ public class ShoppingCart {
 
     public double cartAmount() {
         double price = 0;
-        for (String productName : cart) {
-            price += Product.catalogue.get(productName).getpPrice();
+        for (Map.Entry<Product, Integer> pairEntry: cart.entrySet()) {
+            price += Product.catalogue.get(pairEntry.getKey().getpName()).getpPrice() * cart.get(pairEntry.getKey());
         }
+
+        
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }
 

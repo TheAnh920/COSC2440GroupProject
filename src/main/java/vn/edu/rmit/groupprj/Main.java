@@ -52,7 +52,11 @@ public class Main {
                     break;
                 case "4":
                     System.out.print("Input product name: ");
-                    if (ShoppingCart.cartList.get(activeCart).addItem(scanner.nextLine())) {
+                    String productName = scanner.nextLine();
+                    System.out.print("Input product quantity: ");
+                    Integer productQuant = scanner.nextInt();
+                    if (ShoppingCart.cartList.get(activeCart).addItem(productName, productQuant)) {
+                        
                         System.out.println("Product added to cart successfully!");
                     } else {
                         System.out.println("Failed, the selected product is out of stock, does not exist, or is already in your cart!");
