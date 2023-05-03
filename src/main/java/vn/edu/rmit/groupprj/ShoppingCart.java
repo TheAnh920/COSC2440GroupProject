@@ -112,4 +112,12 @@ public class ShoppingCart {
         }
         return true;
     }
+
+    public static boolean displayCurrentCart() {
+        for (Integer i: cartList.keySet()) {
+            System.out.println(cartList.get(i).cart);
+            
+        }
+        return true;
+    }
 }
