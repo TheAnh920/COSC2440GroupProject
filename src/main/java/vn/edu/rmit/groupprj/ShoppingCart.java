@@ -12,7 +12,7 @@ public class ShoppingCart {
     static int count = 0;
     //  Unique key for each cart
     private final Integer key;
-    Map<String, Integer> cart = new HashMap<>();
+    public static Map<String, Integer> cart = new HashMap<>();
     private double weight = 0;
 
     public ShoppingCart() {

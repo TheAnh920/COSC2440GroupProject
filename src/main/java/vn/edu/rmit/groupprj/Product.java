@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Product {
-    static Map<String, Product> catalogue = new HashMap<>();
+    public static Map<String, Product> catalogue = new HashMap<>();
     private final String pName;
     private String pDesc;
     private int pQuantity;
@@ -249,5 +249,12 @@ public abstract class Product {
             }
             return true;
         }
+    }
+
+    public static void generateProducts() {
+
+
+        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100, 49.99, 0.7));
+        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator", 100, 9.99));
     }
 }
