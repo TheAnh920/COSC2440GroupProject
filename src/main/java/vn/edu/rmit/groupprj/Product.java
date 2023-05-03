@@ -252,8 +252,6 @@ public abstract class Product {
     }
 
     public static void generateProducts() {
-
-
         Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100, 49.99, 0.7));
         Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator", 100, 9.99));
     }

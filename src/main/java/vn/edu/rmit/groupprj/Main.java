@@ -4,19 +4,22 @@ package vn.edu.rmit.groupprj;
  * @author Group 21
  */
 
-import java.util.Scanner;
-
 import vn.edu.rmit.groupprj.Coupons.CouponController;
+
+import java.util.Scanner;
 
 public class Main {
     //  Declare a static variable activeCart to indicate the cart the user is interacting with
     static int activeCart;
-    
-
-    
 
     public static void main(String[] args) {
-        System.out.println("COSC2440 INDIVIDUAL PROJECT\n" + "Instructor: Mr. Tri Dang\n" + "s3927195 - Nguyen The Anh");
+        System.out.println("COSC2440 GROUP PROJECT\n" +
+                "Instructor: Mr. Tri Dang\n" +
+                "Group: Group 21\n" +
+                "s3927195 - Nguyen The Anh\n" +
+                "s3926080 - Nguyen Bao Minh\n" +
+                "s3928141 - Tran Viet Hoang\n" +
+                "s3926234 - Nguyen Cong Chinh");
 //      Create a default cart for users first opening the program
         ShoppingCart.cartList.put(1, new ShoppingCart());
 //      Set the active cart to the newly created cart
@@ -24,7 +27,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Product.generateProducts();
         CouponController.generateCoupons();
-        
+
 //      Looping the menu for users to interact
         while (true) {
             System.out.println("=============================");
