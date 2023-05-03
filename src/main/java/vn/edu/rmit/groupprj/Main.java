@@ -91,7 +91,9 @@ public class Main {
                     Product.editProduct();
                     break;
                 case "12":
-                    ShoppingCart.displayCurrentCart();
+                    System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
+                    System.out.println(ShoppingCart.cartList.get(activeCart).cart);
+                    
                     break;    
                 default:
                     System.out.println("Invalid command.");
