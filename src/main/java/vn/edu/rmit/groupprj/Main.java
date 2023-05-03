@@ -6,9 +6,14 @@ package vn.edu.rmit.groupprj;
 
 import java.util.Scanner;
 
+import vn.edu.rmit.groupprj.Coupons.CouponController;
+
 public class Main {
     //  Declare a static variable activeCart to indicate the cart the user is interacting with
     static int activeCart;
+    
+
+    
 
     public static void main(String[] args) {
         System.out.println("COSC2440 INDIVIDUAL PROJECT\n" + "Instructor: Mr. Tri Dang\n" + "s3927195 - Nguyen The Anh");
@@ -17,6 +22,9 @@ public class Main {
 //      Set the active cart to the newly created cart
         Main.activeCart = 1;
         Scanner scanner = new Scanner(System.in);
+        Product.generateProducts();
+        CouponController.generateCoupons();
+        
 //      Looping the menu for users to interact
         while (true) {
             System.out.println("=============================");

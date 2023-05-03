@@ -7,8 +7,8 @@ public class PercentCoupon extends Coupon{
         return percentOff;
     }
 
-    public PercentCoupon(String couponName, int percentOff) {
-        super(couponName);
+    public PercentCoupon(String couponName, String couponDesc, int percentOff) {
+        super(couponName, couponDesc);
         this.percentOff = percentOff;
     }
 

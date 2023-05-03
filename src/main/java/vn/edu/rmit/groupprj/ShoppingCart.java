@@ -12,7 +12,7 @@ public class ShoppingCart {
     static int count = 0;
     //  Unique key for each cart
     private final Integer key;
-    Map<Product, Integer> cart = new HashMap<>();
+    public static Map<String, Integer> cart = new HashMap<>();
     private double weight = 0;
 
     public ShoppingCart() {
@@ -39,10 +39,10 @@ public class ShoppingCart {
             return false;
         }
         Product.catalogue.get(name).setpQuantity(Product.catalogue.get(name).getpQuantity() - quantity);
-        if (!cart.containsKey(Product.catalogue.get(name))) {
-            cart.put(Product.catalogue.get(name), quantity);
+        if (!cart.containsKey(Product.catalogue.get(name).getpName())) {
+            cart.put(Product.catalogue.get(name).getpName(), quantity);
         } else {
-            cart.put(Product.catalogue.get(name), cart.get(Product.catalogue.get(name)) + quantity);
+            cart.put(Product.catalogue.get(name).getpName(), cart.get(Product.catalogue.get(name).getpName()) + quantity);
         }
 //      If the added product is a physical product, add its weight to the total weight of the cart
         if (Product.catalogue.get(name).getType().equals("PHYSICAL")) {
@@ -66,10 +66,10 @@ public class ShoppingCart {
 
     public double cartAmount() {
         double price = 0;
-        for (Map.Entry<Product, Integer> pairEntry : cart.entrySet()) {
-            price += Product.catalogue.get(pairEntry.getKey().getpName()).getpPrice() * cart.get(pairEntry.getKey());
+        for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
+            price += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()));
+            
         }
-
 
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }

@@ -11,8 +11,8 @@ public class PriceCoupon extends Coupon{
         this.priceOff = priceOff;
     }
 
-    public PriceCoupon(String couponName, double priceOff) {
-        super(couponName);
+    public PriceCoupon(String couponName, String couponDesc, double priceOff) {
+        super(couponName, couponDesc);
         this.priceOff = priceOff;
     }
 
