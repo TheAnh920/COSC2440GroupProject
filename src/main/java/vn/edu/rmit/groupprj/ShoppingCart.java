@@ -74,6 +74,14 @@ public class ShoppingCart {
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }
 
+    public double cartTax() {
+        double tax = 0;
+        for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
+            tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * Product.catalogue.get(pairEntry.getKey()).gettRate());
+        }
+        return tax;
+    }
+
     public static void createNewCart() {
         ShoppingCart newCart = new ShoppingCart();
         cartList.put(newCart.key, newCart);
