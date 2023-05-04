@@ -1,5 +1,8 @@
 package vn.edu.rmit.groupprj;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * @author Group 21
  */
@@ -82,6 +85,8 @@ public class ShoppingCart {
         return tax;
     }
 
+
+
     public static void createNewCart() {
         ShoppingCart newCart = new ShoppingCart();
         cartList.put(newCart.key, newCart);
@@ -120,4 +125,34 @@ public class ShoppingCart {
         }
         return true;
     }
+
+    //     public static void cartReceipt() {
+    //     System.out.println("Cart " + Main.activeCart + " - weight: " + cartList.get(Main.activeCart).weight);
+    //     System.out.println(cartList.get(Main.activeCart).cart);
+    //     System.out.println("Total amount: " + cartList.get(Main.activeCart).cartAmount());
+    //     System.out.println("Total tax: " + cartList.get(Main.activeCart).cartTax());
+    //     System.out.println("Total amount after tax: " + (cartList.get(Main.activeCart).cartAmount() + cartList.get(Main.activeCart).cartTax()));
+    //     System.out.println("Date of purchase: " + new Date());
+        
+    // }
+
+    public static void cartReceipt() {
+        try {
+            FileWriter writer = new FileWriter("receipt.txt");
+            System.out.println("FileWriter object created successfully.");
+            writer.write("Cart " + Main.activeCart + " - weight: " + cartList.get(Main.activeCart).weight + "\n");
+            writer.write(cartList.get(Main.activeCart).cart + "\n");
+            writer.write("Total amount: " + cartList.get(Main.activeCart).cartAmount() + "\n");
+            writer.write("Total tax: " + cartList.get(Main.activeCart).cartTax() + "\n");
+            writer.write("Total amount after tax: " + (cartList.get(Main.activeCart).cartAmount() + cartList.get(Main.activeCart).cartTax()) + "\n");
+            writer.write("Date of purchase: " + new Date() + "\n");
+            writer.close();
+            System.out.println("Receipt saved to receipt.txt");
+        } catch (IOException e) {
+            System.out.println("Error while writing receipt to file: " + e.getMessage());
+        }
+
+    }
+
+
 }
