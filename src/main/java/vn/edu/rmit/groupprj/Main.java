@@ -42,7 +42,8 @@ public class Main {
             System.out.println("9. Display all carts");
             System.out.println("10. Create new product");
             System.out.println("11. Edit a product");
-            System.out.println("12. Test");
+            System.out.println("12. View current cart");
+            System.out.println("13. Test");
             System.out.println("0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -102,6 +103,10 @@ public class Main {
                     Product.editProduct();
                     break;
                 case "12":
+                    System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
+                    System.out.println(ShoppingCart.cartList.get(activeCart).cart);
+                    break;
+                case "13":
                     CouponController.allAvailableCoupon();
                     break;
                 default:
