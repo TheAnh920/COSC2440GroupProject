@@ -70,6 +70,7 @@ public abstract class Product {
     public void settRate(double taxRate) {
         tRate = taxRate;
     }
+
     public abstract String getType();
 
     @Override
@@ -167,7 +168,6 @@ public abstract class Product {
         } else {
             taxRate = 0.2;
         }
-
 
 
 //      Ask user if the product can be used as a gift

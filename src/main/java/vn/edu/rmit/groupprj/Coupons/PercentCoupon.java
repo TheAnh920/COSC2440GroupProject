@@ -1,6 +1,6 @@
 package vn.edu.rmit.groupprj.Coupons;
 
-public class PercentCoupon extends Coupon{
+public class PercentCoupon extends Coupon {
     private int percentOff;
 
     public int getPercentOff() {
@@ -12,9 +12,9 @@ public class PercentCoupon extends Coupon{
         this.percentOff = percentOff;
     }
 
-    public String getCouponType(){
+    public String getCouponType() {
         return "PERCENT";
     }
 
-    
+
 }

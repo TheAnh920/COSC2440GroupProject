@@ -1,6 +1,6 @@
 package vn.edu.rmit.groupprj.Coupons;
 
-public class PriceCoupon extends Coupon{
+public class PriceCoupon extends Coupon {
     private double priceOff;
 
     public double getPriceOff() {
@@ -16,7 +16,7 @@ public class PriceCoupon extends Coupon{
         this.priceOff = priceOff;
     }
 
-    public String getCouponType(){
+    public String getCouponType() {
         return "PRICE";
     }
 }
