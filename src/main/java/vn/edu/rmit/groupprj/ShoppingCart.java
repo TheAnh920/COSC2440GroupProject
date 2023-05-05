@@ -2,11 +2,6 @@ package vn.edu.rmit.groupprj;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
-/**
- * @author Group 21
- */
-
 import java.util.*;
 
 public class ShoppingCart {
@@ -86,7 +81,6 @@ public class ShoppingCart {
     }
 
 
-
     public static void createNewCart() {
         ShoppingCart newCart = new ShoppingCart();
         cartList.put(newCart.key, newCart);
@@ -136,12 +130,13 @@ public class ShoppingCart {
     //     System.out.println("Total tax: " + cartList.get(Main.activeCart).cartTax());
     //     System.out.println("Total amount after tax: " + (cartList.get(Main.activeCart).cartAmount() + cartList.get(Main.activeCart).cartTax()));
     //     System.out.println("Date of purchase: " + new Date());
-        
+
     // }
 
-    public static void cartReceipt() {
+    public void cartReceipt() {
         try {
-            FileWriter writer = new FileWriter("receipt.txt");
+            String receiptName = "Cart " + Main.activeCart + " receipt.txt";
+            FileWriter writer = new FileWriter(receiptName);
             System.out.println("FileWriter object created successfully.");
             writer.write("Cart " + Main.activeCart + " - weight: " + cartList.get(Main.activeCart).weight + "\n");
             writer.write(cartList.get(Main.activeCart).cart + "\n");
@@ -154,8 +149,5 @@ public class ShoppingCart {
         } catch (IOException e) {
             System.out.println("Error while writing receipt to file: " + e.getMessage());
         }
-
     }
-
-
 }
