@@ -1,0 +1,6 @@
+Cart 3 - weight: 3.5
+{towel=25, album=20}
+Total amount: 1450.35
+Total tax: 165.0
+Total amount after tax: 1615.35
+Date of purchase: Thu May 04 21:02:36 ICT 2023
