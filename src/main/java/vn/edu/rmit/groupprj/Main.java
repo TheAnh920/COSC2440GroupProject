@@ -4,6 +4,8 @@ package vn.edu.rmit.groupprj;
  * @author Group 21
  */
 
+import vn.edu.rmit.groupprj.Coupons.CouponController;
+
 import java.util.Scanner;
 
 public class Main {
@@ -11,12 +13,21 @@ public class Main {
     static int activeCart;
 
     public static void main(String[] args) {
-        System.out.println("COSC2440 INDIVIDUAL PROJECT\n" + "Instructor: Mr. Tri Dang\n" + "s3927195 - Nguyen The Anh");
+        System.out.println("COSC2440 GROUP PROJECT\n" +
+                "Instructor: Mr. Tri Dang\n" +
+                "Group: Group 21\n" +
+                "s3927195 - Nguyen The Anh\n" +
+                "s3926080 - Nguyen Bao Minh\n" +
+                "s3928141 - Tran Viet Hoang\n" +
+                "s3926234 - Nguyen Cong Chinh");
 //      Create a default cart for users first opening the program
         ShoppingCart.cartList.put(1, new ShoppingCart());
 //      Set the active cart to the newly created cart
         Main.activeCart = 1;
         Scanner scanner = new Scanner(System.in);
+        Product.generateProducts();
+        CouponController.generateCoupons();
+
 //      Looping the menu for users to interact
         while (true) {
             System.out.println("=============================");
@@ -32,6 +43,7 @@ public class Main {
             System.out.println("10. Create new product");
             System.out.println("11. Edit a product");
             System.out.println("12. View current cart");
+            System.out.println("13. Test");
             System.out.println("0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -93,8 +105,10 @@ public class Main {
                 case "12":
                     System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
                     System.out.println(ShoppingCart.cartList.get(activeCart).cart);
-                    
-                    break;    
+                    break;
+                case "13":
+                    CouponController.allAvailableCoupon();
+                    break;
                 default:
                     System.out.println("Invalid command.");
             }
