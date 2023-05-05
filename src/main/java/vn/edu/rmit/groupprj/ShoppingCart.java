@@ -12,7 +12,7 @@ public class ShoppingCart {
     static int count = 0;
     //  Unique key for each cart
     private final Integer key;
-    public Map<String, Integer> cart = new HashMap<>();
+    Map<String, Integer> cart = new HashMap<>();
     private double weight = 0;
 
     public ShoppingCart() {
@@ -108,7 +108,10 @@ public class ShoppingCart {
 //      Loop through the LinkedHashMap and print all carts
         for (Integer i : cartList.keySet()) {
             System.out.println("Cart " + cartList.get(i).key + " - weight: " + cartList.get(i).weight);
-            System.out.println(cartList.get(i).cart);
+//            System.out.println(cartList.get(i).cart);
+            for (Map.Entry<String, Integer> pairEntry : cartList.get(i).cart.entrySet()) {
+                System.out.println(pairEntry.getValue() + " x " + pairEntry.getKey());
+            }
         }
         return true;
     }

@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Product {
-    public static Map<String, Product> catalogue = new HashMap<>();
+    static Map<String, Product> catalogue = new HashMap<>();
     private final String pName;
     private String pDesc;
     private int pQuantity;

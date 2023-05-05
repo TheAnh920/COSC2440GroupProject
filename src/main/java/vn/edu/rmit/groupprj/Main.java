@@ -4,8 +4,7 @@ package vn.edu.rmit.groupprj;
  * @author Group 21
  */
 
-import vn.edu.rmit.groupprj.Coupons.CouponController;
-
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -104,10 +103,12 @@ public class Main {
                     break;
                 case "12":
                     System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
-                    System.out.println(ShoppingCart.cartList.get(activeCart).cart);
+                    for (Map.Entry<String, Integer> pairEntry : ShoppingCart.cartList.get(activeCart).cart.entrySet()) {
+                        System.out.println(pairEntry.getValue() + " x " + pairEntry.getKey());
+                    }
                     break;
                 case "13":
-                    CouponController.allAvailableCoupon();
+                    CouponController.allAvailableCoupon(activeCart);
                     break;
                 default:
                     System.out.println("Invalid command.");
