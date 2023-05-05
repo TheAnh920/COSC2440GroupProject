@@ -14,12 +14,16 @@ public abstract class Product {
     private String pDesc;
     private int pQuantity;
     private double pPrice;
+    private String tType;
+    private double tRate;
 
-    public Product(String name, String desc, int quantity, double price) {
+    public Product(String name, String desc, int quantity, double price, String taxType, double taxRate) {
         pName = name;
         pDesc = desc;
         pQuantity = quantity;
         pPrice = price;
+        tType = taxType;
+        tRate = taxRate;
     }
 
     public String getpName() {
@@ -38,6 +42,15 @@ public abstract class Product {
         return pPrice;
     }
 
+    public String gettType() {
+        return tType;
+    }
+
+    public double gettRate() {
+        return tRate;
+    }
+
+
     public void setpDesc(String desc) {
         pDesc = desc;
     }
@@ -50,6 +63,13 @@ public abstract class Product {
         pPrice = price;
     }
 
+    public void settType(String taxType) {
+        tType = taxType;
+    }
+
+    public void settRate(double taxRate) {
+        tRate = taxRate;
+    }
     public abstract String getType();
 
     @Override
@@ -116,6 +136,40 @@ public abstract class Product {
                 System.out.print("That is not a valid weight. Please try again: ");
             }
         }
+
+//      Ask user to choose a tax type
+        System.out.println("Select tax type: ");
+        String taxType;
+        while (true) {
+            System.out.println("1. Tax-free");
+            System.out.println("2. Normal tax (10%)");
+            System.out.println("3. Luxury tax (20%)");
+            int choice = scanner.nextInt();
+            if (choice == 1) {
+                taxType = "Tax-free";
+                break;
+            } else if (choice == 2) {
+                taxType = "Normal tax";
+                break;
+            } else if (choice == 3) {
+                taxType = "Luxury tax";
+                break;
+            } else {
+                System.out.print("That is not a valid option. Please try again: ");
+            }
+        }
+        // ask user a tax rate
+        double taxRate;
+        if (taxType.equals("Tax-free")) {
+            taxRate = 0;
+        } else if (taxType.equals("Normal tax")) {
+            taxRate = 0.1;
+        } else {
+            taxRate = 0.2;
+        }
+
+
+
 //      Ask user if the product can be used as a gift
         System.out.println("Can this product be used as a gift? (Y/N)");
         String isGift;
@@ -129,16 +183,16 @@ public abstract class Product {
         }
 //      Put the new product into the catalogue
         if (type.equalsIgnoreCase("Digital") && isGift.equalsIgnoreCase("N")) {
-            DigitalProduct dp = new DigitalProduct(name, desc, quantity, price);
+            DigitalProduct dp = new DigitalProduct(name, desc, quantity, price, taxType, taxRate);
             catalogue.put(name, dp);
         } else if (type.equalsIgnoreCase("Digital")) {
-            DigitalGift dg = new DigitalGift(name, desc, quantity, price);
+            DigitalGift dg = new DigitalGift(name, desc, quantity, price, taxType, taxRate);
             catalogue.put(name, dg);
         } else if (isGift.equalsIgnoreCase("N")) {
-            PhysicalProduct pp = new PhysicalProduct(name, desc, quantity, price, weight);
+            PhysicalProduct pp = new PhysicalProduct(name, desc, quantity, price, weight, taxType, taxRate);
             catalogue.put(name, pp);
         } else {
-            PhysicalGift pg = new PhysicalGift(name, desc, quantity, price, weight);
+            PhysicalGift pg = new PhysicalGift(name, desc, quantity, price, weight, taxType, taxRate);
             catalogue.put(name, pg);
         }
         System.out.println("New product successfully added!");
@@ -252,7 +306,7 @@ public abstract class Product {
     }
 
     public static void generateProducts() {
-        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100, 49.99, 0.7));
-        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator", 100, 9.99));
+        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100, 50, 0.7, "Normal tax", 0.1));
+        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator", 100, 10, "Luxury tax", 0.2));
     }
 }

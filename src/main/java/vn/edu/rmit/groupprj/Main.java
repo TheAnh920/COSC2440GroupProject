@@ -43,6 +43,7 @@ public class Main {
             System.out.println("11. Edit a product");
             System.out.println("12. View current cart");
             System.out.println("13. Test");
+            System.out.println("14. Cart's tax");
             System.out.println("0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -109,6 +110,10 @@ public class Main {
                     break;
                 case "13":
                     CouponController.allAvailableCoupon(activeCart);
+                    break;
+                case "14":
+                    System.out.println("The total tax of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
+                            " is: " + ShoppingCart.cartList.get(activeCart).cartTax());
                     break;
                 default:
                     System.out.println("Invalid command.");
