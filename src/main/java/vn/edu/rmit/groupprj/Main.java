@@ -42,6 +42,7 @@ public class Main {
             System.out.println("9. Display all carts");
             System.out.println("10. Create new product");
             System.out.println("11. Edit a product");
+            System.out.println("12. Test");
             System.out.println("0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -99,6 +100,9 @@ public class Main {
                     break;
                 case "11":
                     Product.editProduct();
+                    break;
+                case "12":
+                    CouponController.allAvailableCoupon();
                     break;
                 default:
                     System.out.println("Invalid command.");
