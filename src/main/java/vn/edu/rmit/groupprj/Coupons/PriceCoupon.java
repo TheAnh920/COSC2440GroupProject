@@ -16,6 +16,7 @@ public class PriceCoupon extends Coupon {
         this.priceOff = priceOff;
     }
 
+    @Override
     public String getCouponType() {
         return "PRICE";
     }

@@ -83,8 +83,10 @@ public class Main {
                     }
                     break;
                 case "6":
+                    
                     System.out.println("The total price of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
-                            " is: " + ShoppingCart.cartList.get(activeCart).cartAmount());
+                    " is: " + ShoppingCart.cartList.get(activeCart).cartAmount());
+                    
                     break;
                 case "7":
                     ShoppingCart.createNewCart();
@@ -111,6 +113,10 @@ public class Main {
                     break;
                 case "13":
                     CouponController.allAvailableCoupon(activeCart);
+                    System.out.print("Select the coupon you wish to use: ");
+                    int choiceCoupon = scanner.nextInt();
+                    CouponController.calcAmountOff(CouponController.applyCoupon(choiceCoupon - 1), choiceCoupon - 1); 
+                    scanner.nextLine();
                     break;
                 case "14":
                     System.out.println("The total tax of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
@@ -118,6 +124,9 @@ public class Main {
                     break;
                 case "15":
                     ShoppingCart.cartList.get(activeCart).cartReceipt();
+                    break;
+                case "16":
+                    
                     break;
                 default:
                     System.out.println("Invalid command.");

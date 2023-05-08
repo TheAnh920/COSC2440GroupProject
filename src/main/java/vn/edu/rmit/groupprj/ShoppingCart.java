@@ -66,9 +66,11 @@ public class ShoppingCart {
 
     public double cartAmount() {
         double price = 0;
+        
         for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
             price += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()));
         }
+
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }
 

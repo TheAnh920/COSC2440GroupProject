@@ -12,6 +12,7 @@ public class PercentCoupon extends Coupon {
         this.percentOff = percentOff;
     }
 
+    @Override
     public String getCouponType() {
         return "PERCENT";
     }

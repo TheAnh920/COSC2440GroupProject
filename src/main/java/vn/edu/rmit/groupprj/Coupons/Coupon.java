@@ -1,6 +1,6 @@
 package vn.edu.rmit.groupprj.Coupons;
 
-public class Coupon {
+public abstract class Coupon {
     private String couponName;
     private String couponDesc;
 
@@ -17,5 +17,5 @@ public class Coupon {
         this.couponDesc = couponDesc;
     }
 
-
+    public abstract String getCouponType();
 }
