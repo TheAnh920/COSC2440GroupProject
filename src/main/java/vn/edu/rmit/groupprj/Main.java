@@ -24,7 +24,6 @@ public class Main {
         Product.loadProducts();
         // end test
 
->>>>>>> Stashed changes
 //      Create a default cart for users first opening the program
         ShoppingCart.cartList.put(1, new ShoppingCart());
 //      Set the active cart to the newly created cart

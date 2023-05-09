@@ -338,7 +338,6 @@ public abstract class Product {
             return true;
         }
     }
-=======
 
     public static void generateProducts() {
         Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
@@ -376,5 +375,4 @@ public abstract class Product {
         }
     }
     // end test
->>>>>>> Stashed changes
 }
