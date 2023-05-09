@@ -87,18 +87,39 @@ public class ShoppingCart {
         messageList.get(index)[1] = messageChange;
     }
 
-    public boolean removeItem(String name) {
+    public void removeItemByChoice(String removeChoice, String name) {
+        int index = Integer.parseInt(matchedList.get(Integer.parseInt(removeChoice) - 1)[2]);
+        cart.put(name, cart.get(name)-1);
+        messageList.remove(index);
+        
+
+
+    }
+
+    public boolean removeItem(String name, int quantity) {
         if (!cart.containsKey(name)) {
             return false;
         }
-        Product.catalogue.get(name).setpQuantity(Product.catalogue.get(name).getpQuantity() + 1);
-        cart.remove(name);
-//      If the removed product is a physical product, deduct its weight from the total weight of the cart
-        if (Product.catalogue.get(name).getType().equals("PHYSICAL")) {
-            weight -= ((PhysicalProduct) Product.catalogue.get(name)).getpWeight();
+        Product product = Product.catalogue.get(name);
+        int currentQuantity = cart.get(name);
+        if (quantity > currentQuantity) {
+        System.out.printf("The quantity of %s in your cart is %d. You cannot remove more than that.\n", name, currentQuantity);
+        return false;
+        }
+        if (quantity == currentQuantity) {cart.remove(name);
+
+        } else {
+            cart.put(name, currentQuantity - quantity);
+        }
+        product.setpQuantity(product.getpQuantity() + quantity);
+        // If the removed product is a physical product, deduct its weight from the total weight of the cart
+        if (product.getType().equals("PHYSICAL")) {
+            weight -= ((PhysicalProduct) product).getpWeight() * quantity;
         }
         return true;
-    }
+        }
+
+    
 
     public double cartAmount() {
         double price = 0;
