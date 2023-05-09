@@ -1,9 +1,9 @@
-Cart 1 - weight: 3.5
+Cart 1 - weight: 4.5
 
-towel x 5   :   250.0
-album x 10   :   100.0
-Total amount (including shipping fee): 350.35
-Total tax: 45.0
+Laptop x 1   :   100.0
+Flower x 2   :   20.0
+Total amount (including shipping fee): 120.45
+Total tax: 10.0
 
-Total amount after tax: 395.35
-Date of purchase: Tue May 09 22:01:28 ICT 2023
+Total amount after tax: 130.45
+Date of purchase: Tue May 09 23:37:11 ICT 2023

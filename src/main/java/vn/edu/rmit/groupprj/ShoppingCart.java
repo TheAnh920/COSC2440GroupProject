@@ -14,7 +14,7 @@ public class ShoppingCart {
     ArrayList<String[]> messageList = new ArrayList<>();
     ArrayList<String[]> matchedList = new ArrayList<>();
     private double weight = 0;
-    
+
     public ShoppingCart() {
 //      Count how many carts have been created, then create the corresponding key, making the key unique
         count++;
@@ -61,7 +61,7 @@ public class ShoppingCart {
     }
 
     public ArrayList<String[]> appendMessage(String name, String message) {
-        messageList.add(new String[] {name, message});
+        messageList.add(new String[]{name, message});
         return messageList;
     }
 
@@ -69,16 +69,17 @@ public class ShoppingCart {
         matchedList.clear();
         for (int i = 0; i < ShoppingCart.cartList.get(Main.activeCart).messageList.size(); i++)
             if (matchName.equalsIgnoreCase(ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0])) {
-                matchedList.add(new String[] {ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0], ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[1], String.valueOf(i)});
+                matchedList.add(new String[]{ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0],
+                        ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[1], String.valueOf(i)});
             }
         return matchedList;
     }
 
-    public void printAllMessagePairs(String matchName){
+    public void printAllMessagePairs() {
         int count = 0;
-        for (int i = 0; i < matchedList.size(); i++){
+        for (String[] strings : matchedList) {
             count++;
-            System.out.println(count + ". " + matchedList.get(i)[0] + " : " + matchedList.get(i)[1]);
+            System.out.println(count + ". " + strings[0] + " : " + strings[1]);
         }
     }
 
@@ -173,7 +174,7 @@ public class ShoppingCart {
             for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
                 writer.write(pairEntry.getKey() + " x " + pairEntry.getValue() + "   :   " + (Product.catalogue.get(pairEntry.getKey()).getpPrice() * pairEntry.getValue()) + "\n");
             }
-                
+
             writer.write("Total amount (including shipping fee): " + cartAmount() + "\n");
             writer.write("Total tax: " + cartTax() + "\n");
             if (CouponController.isCouponAdded()) {
