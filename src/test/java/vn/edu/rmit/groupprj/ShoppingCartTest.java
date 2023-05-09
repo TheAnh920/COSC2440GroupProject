@@ -86,4 +86,47 @@ public class ShoppingCartTest {
         ShoppingCart sc = new ShoppingCart();
         assertTrue(sc.cartReceipt());
     }
+
+    @Test
+    public void messageEditTest() {
+        ShoppingCart sc = new ShoppingCart();
+        sc.matchedList.add(new String[] {"snack", "hello", "0"});
+        sc.messageList.add(new String [] {"snack", "hello"});
+
+        assertTrue(sc.messageEdit("1", "hello"));
+    }
+
+    @Test
+    public void printAllMessagePairsTest() {
+        ShoppingCart sc = new ShoppingCart();
+        sc.matchedList.add(new String[] {"snack", "hello", "0"});
+        sc.messageList.add(new String [] {"snack", "hello"});
+
+        assertTrue(sc.printAllMessagePairs("snack"));
+    }
+
+
+    @Test
+    public void appendMessageTest() {
+        ShoppingCart sc = new ShoppingCart();
+        sc.appendMessage("snack", "hello");
+
+        assertEquals(sc.messageList.get(0)[0], "snack");
+        assertEquals(sc.messageList.get(0)[1], "hello");
+    }
+
+    @Test
+    public void cartTaxTest() {
+        
+        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
+        100, 10, "Luxury tax"));
+        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100,
+        50, 0.7, "Normal tax"));
+
+        ShoppingCart sc = new ShoppingCart();
+        sc.cart.put("towel", 2);
+        sc.cart.put("album", 2);
+
+        assertEquals(sc.cartTax(), 14); 
+    }
 }

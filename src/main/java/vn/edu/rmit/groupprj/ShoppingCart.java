@@ -75,17 +75,19 @@ public class ShoppingCart {
         return matchedList;
     }
 
-    public void printAllMessagePairs() {
+    public boolean printAllMessagePairs(){
         int count = 0;
         for (String[] strings : matchedList) {
             count++;
             System.out.println(count + ". " + strings[0] + " : " + strings[1]);
         }
+        return true;
     }
 
-    public void messageEdit(String changeChoice, String messageChange) {
+    public boolean messageEdit(String changeChoice, String messageChange) {
         int index = Integer.parseInt(matchedList.get(Integer.parseInt(changeChoice) - 1)[2]);
         messageList.get(index)[1] = messageChange;
+        return true;
     }
 
     public boolean removeItem(String name) {
