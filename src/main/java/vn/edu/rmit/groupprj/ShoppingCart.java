@@ -83,7 +83,6 @@ public class ShoppingCart {
         for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
             price += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()));
         }
-
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }
 
@@ -145,22 +144,20 @@ public class ShoppingCart {
 
     public void cartReceipt() {
         try {
-            String receiptName = "Cart " + Main.activeCart + " receipt.txt";
+            String receiptName = "Cart " + key + " receipt.txt";
             FileWriter writer = new FileWriter(receiptName);
             System.out.println("FileWriter object created successfully.");
-            writer.write("Cart " + Main.activeCart + " - weight: " + cartList.get(Main.activeCart).weight + "\n");
-            writer.write(cartList.get(Main.activeCart).cart + "\n");
-            writer.write("Cart total: " + cartList.get(Main.activeCart).cartAmount() + "\n");
-            writer.write("Total tax: " + cartList.get(Main.activeCart).cartTax() + "\n");
-            
+            writer.write("Cart " + key + " - weight: " + Math.round(weight * 100) / 100d + "\n");
+            writer.write(cart + "\n");
+            writer.write("Total amount (including shipping fee): " + cartAmount() + "\n");
+            writer.write("Total tax: " + cartTax() + "\n");
             if (CouponController.isCouponAdded()) {
                 writer.write("Coupon: " + Main.amountOff);
             }
-            
-            writer.write("Total amount: " + (cartList.get(Main.activeCart).cartAmount() + cartList.get(Main.activeCart).cartTax()) + "\n");
+            writer.write("Total amount after tax: " + (cartAmount() + cartTax()) + "\n");
             writer.write("Date of purchase: " + new Date() + "\n");
             writer.close();
-            System.out.println("Receipt saved to receipt.txt");
+            System.out.println("Receipt saved to Cart " + key + " receipt.txt");
         } catch (IOException e) {
             System.out.println("Error while writing receipt to file: " + e.getMessage());
         }
