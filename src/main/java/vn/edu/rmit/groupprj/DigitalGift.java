@@ -7,10 +7,12 @@ package vn.edu.rmit.groupprj;
  public class DigitalGift extends DigitalProduct implements CanBeGifted {
     private String message;
 
-    public DigitalGift(String name, String desc, int quantity, double price, String taxType, double taxRate) {
-        super(name, desc, quantity, price, taxType, taxRate);
+    public DigitalGift(String name, String desc, int quantity, double price, String taxType) {
+        super(name, desc, quantity, price, taxType);
     }
 
+
+    
     @Override
     public String getMessage() {
         return message;

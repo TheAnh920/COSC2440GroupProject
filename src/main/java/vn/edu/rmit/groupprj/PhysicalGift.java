@@ -7,10 +7,11 @@ package vn.edu.rmit.groupprj;
  public class PhysicalGift extends PhysicalProduct implements CanBeGifted {
     private String message;
 
-    public PhysicalGift(String name, String desc, int quantity, double price, double weight, String taxType, double taxRate) {
-        super(name, desc, quantity, price, weight, taxType, taxRate);
+    public PhysicalGift(String name, String desc, int quantity, double price, double weight, String taxType) {
+        super(name, desc, quantity, price, taxType, weight);
     }
 
+    
     @Override
     public String getMessage() {
         return message;
