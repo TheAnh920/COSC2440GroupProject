@@ -106,7 +106,7 @@ public class Main {
                 System.out.print("Enter name of product you want to remove: ");
                 String name = scanner.nextLine();
                 ShoppingCart.cartList.get(activeCart).retrieveMatchedPairs(name);
-                ShoppingCart.cartList.get(activeCart).printAllMessagePairs(name);
+                ShoppingCart.cartList.get(activeCart).printAllMessagePairs();
                 System.out.print("Enter the number of the product you want to remove: ");
                 String removeChoice = scanner.nextLine();
                 ShoppingCart.cartList.get(activeCart).removeItemByChoice(removeChoice, name);

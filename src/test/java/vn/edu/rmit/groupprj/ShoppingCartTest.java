@@ -39,14 +39,14 @@ public class ShoppingCartTest {
         ShoppingCart sc = new ShoppingCart();
         ShoppingCart.cartList.put(sc.getKey(), sc);
         sc.addItem("name", 1);
-        assertTrue(sc.removeItem("name"));
+        assertTrue(sc.removeItem("name", 1));
     }
 
     @Test
     public void removeItemFalseTest() {
         ShoppingCart sc = new ShoppingCart();
         ShoppingCart.cartList.put(sc.getKey(), sc);
-        assertFalse(sc.removeItem("name"));
+        assertFalse(sc.removeItem("name", 1));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ShoppingCartTest {
         sc.matchedList.add(new String[] {"snack", "hello", "0"});
         sc.messageList.add(new String [] {"snack", "hello"});
 
-        assertTrue(sc.printAllMessagePairs("snack"));
+        assertTrue(sc.printAllMessagePairs());
     }
 
 
