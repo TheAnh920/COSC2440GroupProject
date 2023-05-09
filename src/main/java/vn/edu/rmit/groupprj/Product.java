@@ -81,85 +81,104 @@ public abstract class Product {
     public static void createNewProduct() {
         Scanner scanner = new Scanner(System.in);
 //      Ask user to choose a product type
-        System.out.print("Choose product type (Digital/Physical): ");
+        System.out.println("Choose product type:\n" +
+                "1 - Digital\n" +
+                "2 - Physical");
         String type;
+//      Input validation
         while (true) {
             type = scanner.nextLine();
-            if (type.equalsIgnoreCase("Digital") || type.equalsIgnoreCase("Physical")) {
+            if (type.equals("1") || type.equals("2")) {
                 break;
             }
-            System.out.print("That is not a valid product type. Please try again: ");
+            System.out.print("That is not a valid option. Please try again: ");
         }
 //      Ask user to input the product's name
         System.out.print("Input product name: ");
         String name;
+//      Input validation
         while (true) {
             name = scanner.nextLine();
 //          Check for name duplicates
             boolean name_exists = catalogue.get(name) != null;
-            if (!name_exists) {
+            if (!name_exists && !name.contains("|") && !name.contains("\n")) {
                 break;
             }
-            System.out.print("A product with that name already exists. Please try again: ");
+            System.out.print("Invalid name. Please try again: ");
         }
 //      Ask user to input the product's descriptions
         System.out.print("Input product descriptions: ");
-        String desc = scanner.nextLine();
+        String desc;
+//      Input validation
+        while (true) {
+            desc = scanner.nextLine();
+            if (!desc.contains("|") && !desc.contains("\n")) {
+                break;
+            }
+            System.out.print("Descriptions contains invalid characters. Please try again: ");
+        }
 //      Ask user to input the product's available quantity
         System.out.print("Input product quantity: ");
-        int quantity;
+        String quantityStr;
+//      Input validation
         while (true) {
-            quantity = scanner.nextInt();
-            if (quantity >= 0) {
+            quantityStr = scanner.nextLine();
+            if (quantityStr.matches("^\\d+$")) {
                 break;
             }
             System.out.print("That is not a valid quantity. Please try again: ");
         }
+        int quantity = Integer.parseInt(quantityStr);
 //      Ask user to input the product's price
         System.out.print("Input product price: ");
-        double price;
+        String priceStr;
+//      Input validation
         while (true) {
-            price = scanner.nextDouble();
-            if (price >= 0) {
+            priceStr = scanner.nextLine();
+            if (priceStr.matches("\\d+(\\.\\d+)?")) {
                 break;
             }
             System.out.print("That is not a valid price. Please try again: ");
         }
+        double price = Math.round(Double.parseDouble(priceStr) * 100) / 100d;
 //      If the product is a physical product, ask user to input its weight
         double weight = 0;
-        if (type.equalsIgnoreCase("Physical")) {
+        if (type.equals("2")) {
             System.out.print("Input product weight: ");
+            String weightStr;
             while (true) {
-                weight = scanner.nextDouble();
-                if (weight >= 0) {
+                weightStr = scanner.nextLine();
+                if (weightStr.matches("\\d+(\\.\\d+)?")) {
                     break;
                 }
                 System.out.print("That is not a valid weight. Please try again: ");
             }
+            weight = Math.round(Double.parseDouble(weightStr) * 100) / 100d;
         }
 
 //      Ask user to choose a tax type
         System.out.println("Select tax type: ");
         String taxType;
+        chooseTax:
         while (true) {
             System.out.println("1. Tax-free");
             System.out.println("2. Normal tax (10%)");
             System.out.println("3. Luxury tax (20%)");
-            int choice = scanner.nextInt();
-            if (choice == 1) {
-                taxType = "Tax-free";
-                break;
-            } else if (choice == 2) {
-                taxType = "Normal tax";
-                break;
-            } else if (choice == 3) {
-                taxType = "Luxury tax";
-                break;
-            } else {
-                System.out.print("That is not a valid option. Please try again: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    taxType = "Tax-free";
+                    break chooseTax;
+                case "2":
+                    taxType = "Normal tax";
+                    break chooseTax;
+                case "3":
+                    taxType = "Luxury tax";
+                    break chooseTax;
+                default:
+                    System.out.print("That is not a valid option. Please try again: ");
             }
         }
-        // ask user a tax rate
         double taxRate;
         if (taxType.equals("Tax-free")) {
             taxRate = 0;
@@ -173,7 +192,6 @@ public abstract class Product {
 //      Ask user if the product can be used as a gift
         System.out.println("Can this product be used as a gift? (Y/N)");
         String isGift;
-        scanner.nextLine();
         while (true) {
             isGift = scanner.nextLine();
             if (isGift.equalsIgnoreCase("Y") || isGift.equalsIgnoreCase("N")) {
@@ -182,10 +200,10 @@ public abstract class Product {
             System.out.print("That is not a valid option. PLease try again: ");
         }
 //      Put the new product into the catalogue
-        if (type.equalsIgnoreCase("Digital") && isGift.equalsIgnoreCase("N")) {
+        if (type.equals("1") && isGift.equalsIgnoreCase("N")) {
             DigitalProduct dp = new DigitalProduct(name, desc, quantity, price, taxType, taxRate);
             catalogue.put(name, dp);
-        } else if (type.equalsIgnoreCase("Digital")) {
+        } else if (type.equals("1")) {
             DigitalGift dg = new DigitalGift(name, desc, quantity, price, taxType, taxRate);
             catalogue.put(name, dg);
         } else if (isGift.equalsIgnoreCase("N")) {
@@ -208,49 +226,78 @@ public abstract class Product {
         } else {
             System.out.println("Product found: " + catalogue.get(name).toString());
 //          Edit the product's wanted attribute
-            System.out.println("What information do you want to edit? (Descriptions/Quantity/Price/Weight)");
-            String field = scanner.nextLine().toLowerCase();
-            switch (field) {
-                case "name":
-                    System.out.println("Cannot change product name.");
+            System.out.println("What information do you want to edit?\n" +
+                    "1 - Descriptions\n" +
+                    "2 - Quantity\n" +
+                    "3 - Price\n" +
+                    "4 - Weight");
+            String field;
+//          Input validation
+            while (true) {
+                field = scanner.nextLine();
+                if (field.equals("1") || field.equals("2") || field.equals("3") || field.equals("4")) {
                     break;
-                case "descriptions":
+                }
+                System.out.print("That is not a valid option. Please try again: ");
+            }
+            switch (field) {
+                case "1":
                     System.out.print("Input new descriptions: ");
-                    catalogue.get(name).setpDesc(scanner.nextLine());
+                    String desc;
+//                  Input validation
+                    while (true) {
+                        desc = scanner.nextLine();
+                        if (!desc.contains("|") && !desc.contains("\n")) {
+                            break;
+                        }
+                        System.out.print("Descriptions contains invalid characters. Please try again: ");
+                    }
+                    catalogue.get(name).setpDesc(desc);
                     System.out.println("Product descriptions edited successfully!");
                     break;
-                case "quantity":
+                case "2":
                     System.out.print("Input new quantity: ");
-                    int quantity = scanner.nextInt();
-                    if (quantity >= 0) {
-                        catalogue.get(name).setpQuantity(quantity);
-                        System.out.println("Product quantity edited successfully!");
-                    } else {
-                        System.out.println("Invalid quantity.");
+                    String quantityStr;
+//                  Input validation
+                    while (true) {
+                        quantityStr = scanner.nextLine();
+                        if (quantityStr.matches("^\\d+$")) {
+                            break;
+                        }
+                        System.out.print("That is not a valid quantity. Please try again: ");
                     }
+                    catalogue.get(name).setpQuantity(Integer.parseInt(quantityStr));
+                    System.out.println("Product quantity updated successfully!");
                     break;
-                case "price":
+                case "3":
                     System.out.print("Input new price: ");
-                    double price = scanner.nextDouble();
-                    if (price >= 0) {
-                        catalogue.get(name).setpPrice(price);
-                        System.out.println("Product price edited successfully!");
-                    } else {
-                        System.out.println("Invalid price.");
+                    String priceStr;
+//                  Input validation
+                    while (true) {
+                        priceStr = scanner.nextLine();
+                        if (priceStr.matches("\\d+(\\.\\d+)?")) {
+                            break;
+                        }
+                        System.out.print("That is not a valid price. Please try again: ");
                     }
+                    catalogue.get(name).setpPrice(Math.round(Double.parseDouble(priceStr) * 100) / 100d);
+                    System.out.println("Product price edited successfully!");
                     break;
-                case "weight":
+                case "4":
                     if (catalogue.get(name).getType().equals("DIGITAL")) {
                         System.out.println("This is a digital product.");
                     } else if (catalogue.get(name).getType().equals("PHYSICAL")) {
                         System.out.print("Input new weight: ");
-                        double weight = scanner.nextDouble();
-                        if (weight >= 0) {
-                            ((PhysicalProduct) catalogue.get(name)).setpWeight(weight);
-                            System.out.println("Product weight edited successfully!");
-                        } else {
-                            System.out.println("Invalid weight.");
+                        String weightStr;
+                        while (true) {
+                            weightStr = scanner.nextLine();
+                            if (weightStr.matches("\\d+(\\.\\d+)?")) {
+                                break;
+                            }
+                            System.out.print("That is not a valid weight. Please try again: ");
                         }
+                        ((PhysicalProduct) catalogue.get(name)).setpWeight(Math.round(Double.parseDouble(weightStr) * 100) / 100d);
+                        System.out.println("Product weight edited successfully!");
                     }
                     break;
             }
@@ -306,7 +353,13 @@ public abstract class Product {
     }
 
     public static void generateProducts() {
-        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100, 50, 0.7, "Normal tax", 0.1));
-        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator", 100, 10, "Luxury tax", 0.2));
+        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
+                100, 10, "Luxury tax", 0.2));
+        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100,
+                50, 0.7, "Normal tax", 0.1));
+        Product.catalogue.put("game", new DigitalGift("game", "Far Cry, an open-world FPS game", 100,
+                50, "Normal tax", 0.1));
+        Product.catalogue.put("flower", new PhysicalGift("flower", "A bouquet of black-jack flowers, also " +
+                "known as pig shit", 100, 10, 1, "Tax-free", 0));
     }
 }

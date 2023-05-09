@@ -24,28 +24,29 @@ public class Main {
 //      Set the active cart to the newly created cart
         Main.activeCart = 1;
         Scanner scanner = new Scanner(System.in);
+
         Product.generateProducts();
         CouponController.generateCoupons();
 
 //      Looping the menu for users to interact
         while (true) {
-            System.out.println("=============================");
-            System.out.println("1. Display all products");
-            System.out.println("2. Search for products");
-            System.out.println("3. View detailed product");
-            System.out.println("4. Add product to cart");
-            System.out.println("5. Remove product from cart");
-            System.out.println("6. Display cart total price");
-            System.out.println("7. Create a new shopping cart");
-            System.out.println("8. Change cart");
-            System.out.println("9. Display all carts");
-            System.out.println("10. Create new product");
-            System.out.println("11. Edit a product");
-            System.out.println("12. View current cart");
-            System.out.println("13. Test");
-            System.out.println("14. Cart's tax");
-            System.out.println("15. Cart's receipt");
-            System.out.println("0. Exit");
+            System.out.println("=============================\n" +
+                    "1. Display all products\n" +
+                    "2. Search for products\n" +
+                    "3. View detailed product\n" +
+                    "4. Add product to cart\n" +
+                    "5. Remove product from cart\n" +
+                    "6. Display cart total price\n" +
+                    "7. Create a new shopping cart\n" +
+                    "8. Change cart\n" +
+                    "9. Display all carts\n" +
+                    "10. Create new product\n" +
+                    "11. Edit a product\n" +
+                    "12. View current cart\n" +
+                    "13. Test\n" +
+                    "14. Cart's tax\n" +
+                    "15. Cart's receipt\n" +
+                    "0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
                 break;
@@ -66,13 +67,21 @@ public class Main {
                     System.out.print("Input product name: ");
                     String productName = scanner.nextLine();
                     System.out.print("Input product quantity: ");
-                    int productQuantity = scanner.nextInt();
-                    if (ShoppingCart.cartList.get(activeCart).addItem(productName, productQuantity)) {
+                    String quantityStr;
+//                  Input validation
+                    while (true) {
+                        quantityStr = scanner.nextLine();
+//                      Only digits allowed and must be greater than 0
+                        if (quantityStr.matches("^\\d+$") && !quantityStr.equals("0")) {
+                            break;
+                        }
+                        System.out.print("That is not a valid quantity. Please try again: ");
+                    }
+                    if (ShoppingCart.cartList.get(activeCart).addItem(productName, Integer.parseInt(quantityStr))) {
                         System.out.println("Product added to cart successfully!");
                     } else {
-                        System.out.println("Failed, the selected product is out of stock or does not exist!");
+                        System.out.println("Action cancelled.");
                     }
-                    scanner.nextLine();
                     break;
                 case "5":
                     System.out.print("Input product name: ");
@@ -83,18 +92,25 @@ public class Main {
                     }
                     break;
                 case "6":
-                    
                     System.out.println("The total price of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
-                    " is: " + ShoppingCart.cartList.get(activeCart).cartAmount());
-                    
+                            " is: " + ShoppingCart.cartList.get(activeCart).cartAmount());
                     break;
                 case "7":
                     ShoppingCart.createNewCart();
                     break;
                 case "8":
                     System.out.print("Input cart key: ");
-                    int tempKey = scanner.nextInt();
-                    ShoppingCart.changeCart(tempKey);
+                    String keyStr;
+//                  Input validation
+                    while (true) {
+                        keyStr = scanner.nextLine();
+                        if (keyStr.matches("^\\d+$")) {
+                            break;
+                        }
+                        System.out.print("That is not a valid key. Please try again: ");
+                    }
+                    int key = Integer.parseInt(keyStr);
+                    ShoppingCart.changeCart(key);
                     break;
                 case "9":
                     ShoppingCart.displayAllCarts();
@@ -114,9 +130,16 @@ public class Main {
                 case "13":
                     CouponController.allAvailableCoupon(activeCart);
                     System.out.print("Select the coupon you wish to use: ");
-                    int choiceCoupon = scanner.nextInt();
-                    CouponController.calcAmountOff(CouponController.applyCoupon(choiceCoupon - 1), choiceCoupon - 1); 
-                    scanner.nextLine();
+                    String choiceStr;
+                    while (true) {
+                        choiceStr = scanner.nextLine();
+                        if (choiceStr.matches("^\\d+$")) {
+                            break;
+                        }
+                        System.out.print("That is not a valid option. Please try again: ");
+                    }
+                    int choiceCoupon = Integer.parseInt(choiceStr);
+                    CouponController.calcAmountOff(CouponController.applyCoupon(choiceCoupon - 1), choiceCoupon - 1);
                     break;
                 case "14":
                     System.out.println("The total tax of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
@@ -126,7 +149,7 @@ public class Main {
                     ShoppingCart.cartList.get(activeCart).cartReceipt();
                     break;
                 case "16":
-                    
+
                     break;
                 default:
                     System.out.println("Invalid command.");

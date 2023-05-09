@@ -30,14 +30,12 @@ public class CouponController {
                     count++;
                     System.out.println(count + ". " + CouponCata.get(pairEntry.getKey()).get(i).getCouponDesc());
                     AvailableCoupons.add(CouponCata.get(pairEntry.getKey()).get(i));
-                        
-                    }
                 }
             }
-        
-        return AvailableCoupons;
         }
-        
+        return AvailableCoupons;
+    }
+
 
     // public static Double applyCoupon(int coupo) {
     //     double amountOff = 0;
@@ -54,7 +52,7 @@ public class CouponController {
     // }
 
     public static String applyCoupon(int coupo) {
-        if (AvailableCoupons.get(coupo).getCouponType() == "PERCENT"){
+        if (AvailableCoupons.get(coupo).getCouponType() == "PERCENT") {
             setCouponAdded(true);
             return "PERCENT";
         } else if (AvailableCoupons.get(coupo).getCouponType() == "PRICE") {
@@ -64,7 +62,7 @@ public class CouponController {
             return "No such coupon exists";
         }
     }
-    
+
     public static Double calcAmountOff(String couponType, int coupo) {
         double amountOff = 0;
         if (couponType == "PERCENT") {
@@ -77,8 +75,6 @@ public class CouponController {
         return amountOff;
     }
 
-
-    
 
     public static void generateCoupons() {
         CouponCata.put(Product.catalogue.get("towel").getpName(), new ArrayList<>());
