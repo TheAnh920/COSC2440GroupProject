@@ -12,8 +12,9 @@ public class ShoppingCart {
     private final Integer key;
     Map<String, Integer> cart = new HashMap<>();
     ArrayList<String[]> messageList = new ArrayList<>();
+    ArrayList<String[]> matchedList = new ArrayList<>();
     private double weight = 0;
-
+    
     public ShoppingCart() {
 //      Count how many carts have been created, then create the corresponding key, making the key unique
         count++;
@@ -60,9 +61,30 @@ public class ShoppingCart {
     }
 
     public ArrayList<String[]> appendMessage(String name, String message) {
-        String[] messagePair = {name, message};
-        messageList.add(messagePair);
+        messageList.add(new String[] {name, message});
         return messageList;
+    }
+
+    public ArrayList<String[]> retrieveMatchedPairs(String matchName) {
+        matchedList.clear();
+        for (int i = 0; i < ShoppingCart.cartList.get(Main.activeCart).messageList.size(); i++)
+            if (matchName.equalsIgnoreCase(ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0])) {
+                matchedList.add(new String[] {ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0], ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[1], String.valueOf(i)});
+            }
+        return matchedList;
+    }
+
+    public void printAllMessagePairs(String matchName){
+        int count = 0;
+        for (int i = 0; i < matchedList.size(); i++){
+            count++;
+            System.out.println(count + ". " + matchedList.get(i)[0] + " : " + matchedList.get(i)[1]);
+        }
+    }
+
+    public void messageEdit(String changeChoice, String messageChange) {
+        int index = Integer.parseInt(matchedList.get(Integer.parseInt(changeChoice) - 1)[2]);
+        messageList.get(index)[1] = messageChange;
     }
 
     public boolean removeItem(String name) {
