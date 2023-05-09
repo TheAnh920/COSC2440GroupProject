@@ -158,8 +158,8 @@ public abstract class Product {
         chooseTax:
         while (true) {
             System.out.println("1. Tax-free");
-            System.out.println("2. Normal tax (10%)");
-            System.out.println("3. Luxury tax (20%)");
+            System.out.println("2. Normal tax");
+            System.out.println("3. Luxury tax");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -341,13 +341,13 @@ public abstract class Product {
 
     public static void generateProducts() {
         Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
-                100, 10, "luxury tax"));
+                100, 10, "Luxury tax"));
         Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100,
-                50, 0.7, "normal tax"));
+                50, 0.7, "Normal tax"));
         Product.catalogue.put("game", new DigitalGift("game", "Far Cry, an open-world FPS game", 100,
-                50, "normal tax"));
+                50, "Normal tax"));
         Product.catalogue.put("flower", new PhysicalGift("flower", "A bouquet of black-jack flowers, also " +
-                "known as pig shit", 100, 10, 1, "tax-free"));
+                "known as pig shit", 100, 10, 1, "Tax-free"));
     }
 
     // test
