@@ -11,6 +11,7 @@ public class ShoppingCart {
     //  Set a unique key for each cart
     private final Integer key;
     Map<String, Integer> cart = new HashMap<>();
+    ArrayList<String[]> messageList = new ArrayList<>();
     private double weight = 0;
 
     public ShoppingCart() {
@@ -56,6 +57,12 @@ public class ShoppingCart {
             }
         }
         return true;
+    }
+
+    public ArrayList<String[]> appendMessage(String name, String message) {
+        String[] messagePair = {name, message};
+        messageList.add(messagePair);
+        return messageList;
     }
 
     public boolean removeItem(String name) {
@@ -144,6 +151,9 @@ public class ShoppingCart {
             writer.write(cart + "\n");
             writer.write("Total amount (including shipping fee): " + cartAmount() + "\n");
             writer.write("Total tax: " + cartTax() + "\n");
+            if (CouponController.isCouponAdded()) {
+                writer.write("Coupon: " + Main.amountOff);
+            }
             writer.write("Total amount after tax: " + (cartAmount() + cartTax()) + "\n");
             writer.write("Date of purchase: " + new Date() + "\n");
             writer.close();
