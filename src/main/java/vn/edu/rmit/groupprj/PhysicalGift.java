@@ -1,7 +1,5 @@
 package vn.edu.rmit.groupprj;
 
-import java.util.ArrayList;
-
 /**
  * @author Group 21
  */
