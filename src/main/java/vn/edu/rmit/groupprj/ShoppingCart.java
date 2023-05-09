@@ -11,6 +11,7 @@ public class ShoppingCart {
     //  Unique key for each cart
     private final Integer key;
     Map<String, Integer> cart = new HashMap<>();
+    ArrayList<String[]> messageList = new ArrayList<>();
     private double weight = 0;
 
     public ShoppingCart() {
@@ -56,6 +57,12 @@ public class ShoppingCart {
             }
         }
         return true;
+    }
+
+    public ArrayList<String[]> appendMessage(String name, String message) {
+        String[] messagePair = {name, message};
+        messageList.add(messagePair);
+        return messageList;
     }
 
     public boolean removeItem(String name) {
@@ -143,9 +150,14 @@ public class ShoppingCart {
             System.out.println("FileWriter object created successfully.");
             writer.write("Cart " + Main.activeCart + " - weight: " + cartList.get(Main.activeCart).weight + "\n");
             writer.write(cartList.get(Main.activeCart).cart + "\n");
-            writer.write("Total amount: " + cartList.get(Main.activeCart).cartAmount() + "\n");
+            writer.write("Cart total: " + cartList.get(Main.activeCart).cartAmount() + "\n");
             writer.write("Total tax: " + cartList.get(Main.activeCart).cartTax() + "\n");
-            writer.write("Total amount after tax: " + (cartList.get(Main.activeCart).cartAmount() + cartList.get(Main.activeCart).cartTax()) + "\n");
+            
+            if (CouponController.isCouponAdded()) {
+                writer.write("Coupon: " + Main.amountOff);
+            }
+            
+            writer.write("Total amount: " + (cartList.get(Main.activeCart).cartAmount() + cartList.get(Main.activeCart).cartTax()) + "\n");
             writer.write("Date of purchase: " + new Date() + "\n");
             writer.close();
             System.out.println("Receipt saved to receipt.txt");

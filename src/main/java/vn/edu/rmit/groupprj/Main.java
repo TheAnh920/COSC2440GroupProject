@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class Main {
     //  Declare a static variable activeCart to indicate the cart the user is interacting with
     static int activeCart;
+    static double amountOff;
+
 
     public static void main(String[] args) {
         System.out.println("COSC2440 GROUP PROJECT\n" +
@@ -97,8 +99,16 @@ public class Main {
                     }
                     break;
                 case "6":
-                    System.out.println("The total price of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
-                            " is: " + ShoppingCart.cartList.get(activeCart).cartAmount());
+                    System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
+                    for (Map.Entry<String, Integer> pairEntry : ShoppingCart.cartList.get(activeCart).cart.entrySet()) {
+                        System.out.println(pairEntry.getValue() + " x " + pairEntry.getKey() + " : " + Product.catalogue.get(pairEntry.getKey()).getpPrice() * pairEntry.getValue());
+                    }
+                    System.out.println("\nTax: " + ShoppingCart.cartList.get(activeCart).cartTax());
+                    if (CouponController.isCouponAdded()) {
+                        System.out.println("Coupon: " + amountOff);
+                    }
+                    System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() +
+                            " total: " + (ShoppingCart.cartList.get(activeCart).cartAmount() + ShoppingCart.cartList.get(activeCart).cartTax() - amountOff));
                     break;
                 case "7":
                     ShoppingCart.createNewCart();
@@ -106,7 +116,7 @@ public class Main {
                 case "8":
                     System.out.print("Input cart key: ");
                     String keyStr;
-//                  Input validation
+    //                  Input validation
                     while (true) {
                         keyStr = scanner.nextLine();
                         if (keyStr.matches("^\\d+$")) {
@@ -114,6 +124,8 @@ public class Main {
                         }
                         System.out.print("That is not a valid key. Please try again: ");
                     }
+                    CouponController.setCouponAdded(false);
+                    amountOff = 0;
                     int key = Integer.parseInt(keyStr);
                     ShoppingCart.changeCart(key);
                     break;
@@ -144,7 +156,7 @@ public class Main {
                         System.out.print("That is not a valid option. Please try again: ");
                     }
                     int choiceCoupon = Integer.parseInt(choiceStr);
-                    CouponController.calcAmountOff(CouponController.applyCoupon(choiceCoupon - 1), choiceCoupon - 1);
+                    amountOff = CouponController.calcAmountOff(CouponController.applyCoupon(choiceCoupon - 1), choiceCoupon - 1);
                     break;
                 case "14":
                     System.out.println("The total tax of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
