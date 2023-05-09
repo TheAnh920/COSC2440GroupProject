@@ -49,10 +49,8 @@ public class Main {
                     "9. Display all carts\n" +
                     "10. Create new product\n" +
                     "11. Edit a product\n" +
-                    "12. View current cart\n" +
-                    "13. Test\n" +
-                    "14. Cart's tax\n" +
-                    "15. Cart's receipt\n" +
+                    "12. Test\n" +
+                    "13. Cart's receipt\n" +
                     "0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -146,12 +144,6 @@ public class Main {
                     Product.editProduct();
                     break;
                 case "12":
-                    System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
-                    for (Map.Entry<String, Integer> pairEntry : ShoppingCart.cartList.get(activeCart).cart.entrySet()) {
-                        System.out.println(pairEntry.getValue() + " x " + pairEntry.getKey());
-                    }
-                    break;
-                case "13":
                     CouponController.allAvailableCoupon(activeCart);
                     System.out.print("Select the coupon you wish to use: ");
                     String choiceStr;
@@ -165,11 +157,7 @@ public class Main {
                     int choiceCoupon = Integer.parseInt(choiceStr);
                     amountOff = CouponController.calcAmountOff(CouponController.applyCoupon(choiceCoupon - 1), choiceCoupon - 1);
                     break;
-                case "14":
-                    System.out.println("The total tax of cart " + ShoppingCart.cartList.get(activeCart).getKey() +
-                            " is: " + ShoppingCart.cartList.get(activeCart).cartTax());
-                    break;
-                case "15":
+                case "13":
                     ShoppingCart.cartList.get(activeCart).cartReceipt();
                     break;
                 default:
