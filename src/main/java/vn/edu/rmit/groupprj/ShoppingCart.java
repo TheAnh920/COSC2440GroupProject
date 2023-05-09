@@ -8,7 +8,7 @@ public class ShoppingCart {
     static Map<Integer, ShoppingCart> cartList = new LinkedHashMap<>();
     //  Static int to count how many carts have been created
     static int count = 0;
-    //  Unique key for each cart
+    //  Set a unique key for each cart
     private final Integer key;
     Map<String, Integer> cart = new HashMap<>();
     private double weight = 0;
