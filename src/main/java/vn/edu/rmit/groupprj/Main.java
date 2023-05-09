@@ -51,7 +51,7 @@ public class Main {
                     "11. Edit a product\n" +
                     "12. Apply coupon to cart\n" +
                     "13. Cart's receipt\n" +
-                    "14. Test\n" +
+                    "14. View and Edit gift messages\n" +
                     "0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -85,14 +85,17 @@ public class Main {
                     }
                     if (ShoppingCart.cartList.get(activeCart).addItem(productName, Integer.parseInt(quantityStr))) {
                         if (Product.catalogue.get(productName) instanceof CanBeGifted) {
-                            System.out.println("Product can be used as a gift. Would you like to add a message?");
+                            System.out.println("Product can be used as a gift. Would you like to add a message to all products?");
                             System.out.println("Y: Yes");
                             System.out.println("N: No");
                             String giftChoice = scanner.nextLine();
                             if (giftChoice.equalsIgnoreCase("y")) {
                                 System.out.print("Enter your message: ");
                                 String message = scanner.nextLine();
-                                ShoppingCart.cartList.get(activeCart).appendMessage(productName, message);
+                                for (int i = 0; i < Integer.parseInt(quantityStr); i++){
+                                    ShoppingCart.cartList.get(activeCart).appendMessage(productName, message);
+                                }
+                                
                             } else if (giftChoice.equalsIgnoreCase("n")) {
                                 ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
                             }
@@ -179,6 +182,11 @@ public class Main {
 
                     ShoppingCart.cartList.get(activeCart).messageEdit(messageChoice, messageChange);
                     System.out.println(ShoppingCart.cartList.get(activeCart).messageList.get(0)[1]);
+                    break;
+                case "15":
+                    for (int i = 0; i < ShoppingCart.cartList.get(activeCart).messageList.size(); i++) {
+                        System.out.println(ShoppingCart.cartList.get(activeCart).messageList.get(i)[0] + " : " + ShoppingCart.cartList.get(activeCart).messageList.get(i)[1]);
+                    }
                     break;
                 default:
                     System.out.println("Invalid command.");
