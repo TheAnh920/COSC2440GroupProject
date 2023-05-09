@@ -1,0 +1,11 @@
+Cart 10
+Laptop|2
+Smartphone|2
+=====
+Cart 11
+Headphones|3
+=====
+Cart 12
+E-book|4
+Monitor|1
+=====

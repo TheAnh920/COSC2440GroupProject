@@ -1,6 +1,17 @@
+<<<<<<< Updated upstream
 Cart 1 - weight: 0.0
 {game=2}
 Total amount: 100.0
 Total tax: 10.0
 Total amount after tax: 110.0
 Date of purchase: Tue May 09 12:50:02 ICT 2023
+=======
+Cart 1 - weight: 4.6
+
+towel x 3   :   150.0
+Total amount (including shipping fee): 150.46
+Total tax: 15.0
+Coupon: 15.0
+Total amount after tax: 165.46
+Date of purchase: Tue May 09 23:55:38 ICT 2023
+>>>>>>> Stashed changes

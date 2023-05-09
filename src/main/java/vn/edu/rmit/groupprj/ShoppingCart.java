@@ -4,6 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+//test
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+//end test
 public class ShoppingCart {
     static Map<Integer, ShoppingCart> cartList = new LinkedHashMap<>();
     //  Static int to count how many carts have been created
@@ -153,4 +159,31 @@ public class ShoppingCart {
             System.out.println("Error while writing receipt to file: " + e.getMessage());
         }
     }
+
+    //test
+    public static void loadCarts() {
+        Path file = Paths.get("carts.txt");
+        try (Stream<String> lines = Files.lines(file)) {
+            ShoppingCart currentCart = new ShoppingCart();
+            for (String line : (Iterable<String>) lines::iterator) {
+                if (line.equals("=====")) {
+                    ShoppingCart.cartList.put(currentCart.key, currentCart);
+                    currentCart = new ShoppingCart();
+                } else {
+                    String[] parts = line.split("\\|");
+                    String name = parts[0];
+                    int quantity = Integer.parseInt(parts[2]);
+                    currentCart.cart.put(name, quantity);
+                }
+            }
+            ShoppingCart.cartList.put(currentCart.key, currentCart);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //end test
+
+    //test2
+    
+    //end test 2
 }

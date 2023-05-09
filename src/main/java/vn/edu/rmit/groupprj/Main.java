@@ -22,6 +22,7 @@ public class Main {
                 "s3926234 - Nguyen Cong Chinh");
         // test
         Product.loadProducts();
+        //ShoppingCart.loadCarts();
         // end test
 
 //      Create a default cart for users first opening the program
