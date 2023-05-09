@@ -68,7 +68,6 @@ public class Main {
                 case "3":
                     System.out.print("Input product name: ");
                     Product.viewDetailedProduct(scanner.nextLine());
-                    
                     break;
                 case "4":
                     System.out.print("Input product name: ");
@@ -84,20 +83,20 @@ public class Main {
                         }
                         System.out.print("That is not a valid quantity. Please try again: ");
                     }
-                    if (Product.catalogue.get(productName) instanceof CanBeGifted) {
-                        System.out.println("Product can be used as a gift. Would you like to add a message?");
-                        System.out.println("Y: Yes");
-                        System.out.println("N: No");
-                        String giftChoice = scanner.nextLine();
-                        if (giftChoice.equalsIgnoreCase("y")) {
-                            System.out.print("Enter your message: ");
-                            String message = scanner.nextLine();
-                            ShoppingCart.cartList.get(activeCart).appendMessage(productName, message);
-                        } else if (giftChoice.equalsIgnoreCase("n")) {
-                            ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
-                        }
-                    }
                     if (ShoppingCart.cartList.get(activeCart).addItem(productName, Integer.parseInt(quantityStr))) {
+                        if (Product.catalogue.get(productName) instanceof CanBeGifted) {
+                            System.out.println("Product can be used as a gift. Would you like to add a message?");
+                            System.out.println("Y: Yes");
+                            System.out.println("N: No");
+                            String giftChoice = scanner.nextLine();
+                            if (giftChoice.equalsIgnoreCase("y")) {
+                                System.out.print("Enter your message: ");
+                                String message = scanner.nextLine();
+                                ShoppingCart.cartList.get(activeCart).appendMessage(productName, message);
+                            } else if (giftChoice.equalsIgnoreCase("n")) {
+                                ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
+                            }
+                        }
                         System.out.println("Product added to cart successfully!");
                     } else {
                         System.out.println("Action cancelled.");
@@ -129,7 +128,7 @@ public class Main {
                 case "8":
                     System.out.print("Input cart key: ");
                     String keyStr;
-    //                  Input validation
+//                  Input validation
                     while (true) {
                         keyStr = scanner.nextLine();
                         if (keyStr.matches("^\\d+$")) {
@@ -170,7 +169,6 @@ public class Main {
                     break;
                 case "14":
                     System.out.print("Enter name of product you wish to view the message of: ");
-                    
                     String messageName = scanner.nextLine();
                     ShoppingCart.cartList.get(activeCart).retrieveMatchedPairs(messageName);
                     ShoppingCart.cartList.get(activeCart).printAllMessagePairs(messageName);

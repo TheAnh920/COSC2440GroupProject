@@ -369,12 +369,19 @@ public abstract class Product {
                 double price = Double.parseDouble(parts[3]);
                 double weight = Double.parseDouble(parts[4]);
                 String taxType = parts[5];
-                if (weight == 0) {
+                String isGift = parts[6];
+                if (weight == -1 && isGift.equals("0")) {
                     DigitalProduct dp = new DigitalProduct(name, description, quantity, price, taxType);
                     catalogue.put(name, dp);
-                } else {
+                } else if (weight == -1) {
+                    DigitalGift dg = new DigitalGift(name, description, quantity, price, taxType);
+                    catalogue.put(name, dg);
+                } else if (isGift.equals("0")) {
                     PhysicalProduct pp = new PhysicalProduct(name, description, quantity, price, weight, taxType);
                     catalogue.put(name, pp);
+                } else {
+                    PhysicalGift pg = new PhysicalGift(name, description, quantity, price, weight, taxType);
+                    catalogue.put(name, pg);
                 }
             });
         } catch (IOException e) {
