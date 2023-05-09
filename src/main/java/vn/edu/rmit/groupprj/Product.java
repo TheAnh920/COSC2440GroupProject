@@ -336,8 +336,12 @@ public abstract class Product {
             if (catalogue.get(name) instanceof CanBeGifted) {
                 System.out.println("This product can also be purchased as a gift!");
             }
-
-            
+            if (CouponController.CouponCata.containsKey(name)) {
+                System.out.println("Coupons: ");
+                for (int i = 0; i < CouponController.CouponCata.get(name).size(); i++) {
+                    System.out.println(CouponController.CouponCata.get(name).get(i).getCouponDesc());
+                }
+            }
             return true;
         }
     }

@@ -66,14 +66,8 @@ public class Main {
                     break;
                 case "3":
                     System.out.print("Input product name: ");
-                    String detailedName = scanner.nextLine();
-                    Product.viewDetailedProduct(detailedName);
-                    if (CouponController.CouponCata.containsKey(detailedName)) {
-                        System.out.println("Coupons: ");
-                        for (int i = 0; i < CouponController.CouponCata.get(detailedName).size(); i++) {
-                            System.out.println(CouponController.CouponCata.get(detailedName).get(i).getCouponDesc());
-                        }
-                    }
+                    Product.viewDetailedProduct(scanner.nextLine());
+                    
                     break;
                 case "4":
                     System.out.print("Input product name: ");
