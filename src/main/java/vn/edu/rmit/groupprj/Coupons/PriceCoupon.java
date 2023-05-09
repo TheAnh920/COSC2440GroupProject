@@ -1,6 +1,6 @@
 package vn.edu.rmit.groupprj.Coupons;
 
-public class PriceCoupon extends Coupon{
+public class PriceCoupon extends Coupon {
     private double priceOff;
 
     public double getPriceOff() {
@@ -11,12 +11,13 @@ public class PriceCoupon extends Coupon{
         this.priceOff = priceOff;
     }
 
-    public PriceCoupon(String couponName, double priceOff) {
-        super(couponName);
+    public PriceCoupon(String couponName, String couponDesc, double priceOff) {
+        super(couponName, couponDesc);
         this.priceOff = priceOff;
     }
 
-    public String getCouponType(){
+    @Override
+    public String getCouponType() {
         return "PRICE";
     }
 }
