@@ -1,6 +1,6 @@
-Cart 1 - weight: 8.8
-{towel=12, Smartphone=1}
-Total amount (including shipping fee): 1400.88
-Total tax: 220.0
-Total amount after tax: 1620.88
-Date of purchase: Tue May 09 19:29:21 ICT 2023
+Cart 1 - weight: 0.0
+{}
+Total amount (including shipping fee): 0.0
+Total tax: 0.0
+Total amount after tax: 0.0
+Date of purchase: Tue May 09 21:30:13 ICT 2023

@@ -164,7 +164,7 @@ public class ShoppingCart {
         return true;
     }
 
-    public void cartReceipt() {
+    public boolean cartReceipt() {
         try {
             String receiptName = "Cart " + key + " receipt.txt";
             FileWriter writer = new FileWriter(receiptName);
@@ -180,8 +180,10 @@ public class ShoppingCart {
             writer.write("Date of purchase: " + new Date() + "\n");
             writer.close();
             System.out.println("Receipt saved to Cart " + key + " receipt.txt");
+            return true;
         } catch (IOException e) {
             System.out.println("Error while writing receipt to file: " + e.getMessage());
+            return false;
         }
     }
 }
