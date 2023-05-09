@@ -4,7 +4,7 @@ package vn.edu.rmit.groupprj;
  * @author Group 21
  */
 
- public class DigitalGift extends DigitalProduct implements CanBeGifted {
+public class DigitalGift extends DigitalProduct implements CanBeGifted {
     private String message;
 
     public DigitalGift(String name, String desc, int quantity, double price, String taxType) {
@@ -12,7 +12,6 @@ package vn.edu.rmit.groupprj;
     }
 
 
-    
     @Override
     public String getMessage() {
         return message;

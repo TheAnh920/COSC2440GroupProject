@@ -14,17 +14,15 @@ public abstract class Product {
     private String pDesc;
     private int pQuantity;
     private double pPrice;
-    private String tType;
+    private String pTaxType;
 
-
-    public Product(String pName, String pDesc, int pQuantity, double pPrice, String tType) {
+    public Product(String pName, String pDesc, int pQuantity, double pPrice, String pTaxType) {
         this.pName = pName;
         this.pDesc = pDesc;
         this.pQuantity = pQuantity;
         this.pPrice = pPrice;
-        this.tType = tType;
+        this.pTaxType = pTaxType;
     }
-
 
     public String getpName() {
         return pName;
@@ -42,8 +40,8 @@ public abstract class Product {
         return pPrice;
     }
 
-    public String gettType() {
-        return tType;
+    public String getpTaxType() {
+        return pTaxType;
     }
 
     public void setpDesc(String desc) {
@@ -58,8 +56,8 @@ public abstract class Product {
         pPrice = price;
     }
 
-    public void settType(String taxType) {
-        tType = taxType;
+    public void setpTaxType(String taxType) {
+        pTaxType = taxType;
     }
 
     public abstract String getType();
@@ -170,15 +168,6 @@ public abstract class Product {
                     System.out.print("That is not a valid option. Please try again: ");
             }
         }
-        double taxRate;
-        if (taxType.equals("Tax-free")) {
-            taxRate = 0;
-        } else if (taxType.equals("Normal tax")) {
-            taxRate = 0.1;
-        } else {
-            taxRate = 0.2;
-        }
-
 
 //      Ask user if the product can be used as a gift
         System.out.println("Can this product be used as a gift? (Y/N)");
@@ -198,7 +187,7 @@ public abstract class Product {
             DigitalGift dg = new DigitalGift(name, desc, quantity, price, taxType);
             catalogue.put(name, dg);
         } else if (isGift.equalsIgnoreCase("N")) {
-            PhysicalProduct pp = new PhysicalProduct(name, desc, quantity, price, taxType, weight);
+            PhysicalProduct pp = new PhysicalProduct(name, desc, quantity, price, weight, taxType);
             catalogue.put(name, pp);
         } else {
             PhysicalGift pg = new PhysicalGift(name, desc, quantity, price, weight, taxType);
@@ -347,10 +336,10 @@ public abstract class Product {
         Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
                 100, 10, "luxury tax"));
         Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100,
-                50, "normal tax", 0.7));
+                50, 0.7, "normal tax"));
         Product.catalogue.put("game", new DigitalGift("game", "Far Cry, an open-world FPS game", 100,
                 50, "normal tax"));
         Product.catalogue.put("flower", new PhysicalGift("flower", "A bouquet of black-jack flowers, also " +
-                "known as pig shit", 100, 10,1, "tax-free"));
+                "known as pig shit", 100, 10, 1, "tax-free"));
     }
 }

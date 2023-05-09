@@ -80,16 +80,14 @@ public class ShoppingCart {
         return Math.round((price + weight * 0.1) * 100) / 100d;
     }
 
-    
-
     public double cartTax() {
         double tax = 0;
-        for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) { 
-            if (Product.catalogue.get(pairEntry.getKey()).gettType() == "luxury tax") {
+        for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
+            if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equals("luxury tax")) {
                 tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * 0.2);
-            } else if (Product.catalogue.get(pairEntry.getKey()).gettType() == "normal tax") {
+            } else if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equals("normal tax")) {
                 tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * 0.1);
-            } else if (Product.catalogue.get(pairEntry.getKey()).gettType() == "Tax-free") {
+            } else if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equals("Tax-free")) {
                 tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * 0);
             }
         }
