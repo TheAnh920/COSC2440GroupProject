@@ -91,7 +91,10 @@ public class Main {
                                 }
 
                             } else if (giftChoice.equalsIgnoreCase("n")) {
-                                ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
+                                for (int i = 0; i < Integer.parseInt(quantityStr); i++){
+                                    ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
+                                }
+                                
                             }
                         }
                         System.out.println("Product added to cart successfully!");
@@ -100,13 +103,18 @@ public class Main {
                     }
                     break;
                 case "5":
-                    System.out.print("Input product name: ");
-                    if (ShoppingCart.cartList.get(activeCart).removeItem(scanner.nextLine())) {
-                        System.out.println("Product removed from cart successfully!");
-                    } else {
-                        System.out.println("Product not found in cart!");
-                    }
-                    break;
+                System.out.print("Enter name of product you want to remove: ");
+                String name = scanner.nextLine();
+                ShoppingCart.cartList.get(activeCart).retrieveMatchedPairs(name);
+                ShoppingCart.cartList.get(activeCart).printAllMessagePairs(name);
+                System.out.print("Enter the number of the product you want to remove: ");
+                String removeChoice = scanner.nextLine();
+                ShoppingCart.cartList.get(activeCart).removeItemByChoice(removeChoice, name);
+                System.out.println("Product removed from cart successfully!");
+                
+                break;
+
+                
                 case "6":
                     System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() + ":");
                     for (Map.Entry<String, Integer> pairEntry : ShoppingCart.cartList.get(activeCart).cart.entrySet()) {
@@ -190,3 +198,4 @@ public class Main {
         }
     }
 }
+

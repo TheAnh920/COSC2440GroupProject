@@ -1,9 +1,6 @@
-Cart 1 - weight: 4.5
-
-Laptop x 1   :   100.0
-Flower x 2   :   20.0
-Total amount (including shipping fee): 120.45
-Total tax: 10.0
-
-Total amount after tax: 130.45
-Date of purchase: Tue May 09 23:37:11 ICT 2023
+Cart 1 - weight: 5.0
+{flower=4}
+Total amount (including shipping fee): 40.5
+Total tax: 0.0
+Total amount after tax: 40.5
+Date of purchase: Tue May 09 23:37:53 ICT 2023
