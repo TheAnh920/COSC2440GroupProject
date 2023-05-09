@@ -14,7 +14,7 @@ public class ShoppingCart {
     ArrayList<String[]> messageList = new ArrayList<>();
     ArrayList<String[]> matchedList = new ArrayList<>();
     private double weight = 0;
-    
+
     public ShoppingCart() {
 //      Count how many carts have been created, then create the corresponding key, making the key unique
         count++;
@@ -61,7 +61,7 @@ public class ShoppingCart {
     }
 
     public ArrayList<String[]> appendMessage(String name, String message) {
-        messageList.add(new String[] {name, message});
+        messageList.add(new String[]{name, message});
         return messageList;
     }
 
@@ -69,22 +69,25 @@ public class ShoppingCart {
         matchedList.clear();
         for (int i = 0; i < ShoppingCart.cartList.get(Main.activeCart).messageList.size(); i++)
             if (matchName.equalsIgnoreCase(ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0])) {
-                matchedList.add(new String[] {ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0], ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[1], String.valueOf(i)});
+                matchedList.add(new String[]{ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[0],
+                        ShoppingCart.cartList.get(Main.activeCart).messageList.get(i)[1], String.valueOf(i)});
             }
         return matchedList;
     }
 
-    public void printAllMessagePairs(String matchName){
+    public boolean printAllMessagePairs(){
         int count = 0;
-        for (int i = 0; i < matchedList.size(); i++){
+        for (String[] strings : matchedList) {
             count++;
-            System.out.println(count + ". " + matchedList.get(i)[0] + " : " + matchedList.get(i)[1]);
+            System.out.println(count + ". " + strings[0] + " : " + strings[1]);
         }
+        return true;
     }
 
-    public void messageEdit(String changeChoice, String messageChange) {
+    public boolean messageEdit(String changeChoice, String messageChange) {
         int index = Integer.parseInt(matchedList.get(Integer.parseInt(changeChoice) - 1)[2]);
         messageList.get(index)[1] = messageChange;
+        return true;
     }
 
     public void removeItemByChoice(String removeChoice, String name) {
@@ -190,14 +193,17 @@ public class ShoppingCart {
             String receiptName = "Cart " + key + " receipt.txt";
             FileWriter writer = new FileWriter(receiptName);
             System.out.println("FileWriter object created successfully.");
-            writer.write("Cart " + key + " - weight: " + Math.round(weight * 100) / 100d + "\n");
-            writer.write(cart + "\n");
+            writer.write("Cart " + key + " - weight: " + Math.round(weight * 100) / 100d + "\n\n");
+            for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
+                writer.write(pairEntry.getKey() + " x " + pairEntry.getValue() + "   :   " + (Product.catalogue.get(pairEntry.getKey()).getpPrice() * pairEntry.getValue()) + "\n");
+            }
+
             writer.write("Total amount (including shipping fee): " + cartAmount() + "\n");
             writer.write("Total tax: " + cartTax() + "\n");
             if (CouponController.isCouponAdded()) {
                 writer.write("Coupon: " + Main.amountOff);
             }
-            writer.write("Total amount after tax: " + (cartAmount() + cartTax()) + "\n");
+            writer.write("\nTotal amount after tax: " + (cartAmount() + cartTax()) + "\n");
             writer.write("Date of purchase: " + new Date() + "\n");
             writer.close();
             System.out.println("Receipt saved to Cart " + key + " receipt.txt");

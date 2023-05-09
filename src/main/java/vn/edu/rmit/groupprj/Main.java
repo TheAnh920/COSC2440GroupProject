@@ -22,19 +22,13 @@ public class Main {
                 "s3926080 - Nguyen Bao Minh\n" +
                 "s3928141 - Tran Viet Hoang\n" +
                 "s3926234 - Nguyen Cong Chinh");
-        // test
         Product.loadProducts();
-        // end test
-
+        CouponController.generateCoupons();
 //      Create a default cart for users first opening the program
         ShoppingCart.cartList.put(1, new ShoppingCart());
 //      Set the active cart to the newly created cart
         Main.activeCart = 1;
         Scanner scanner = new Scanner(System.in);
-
-        Product.generateProducts();
-        CouponController.generateCoupons();
-
 //      Looping the menu for users to interact
         while (true) {
             System.out.println("=============================\n" +
@@ -92,10 +86,10 @@ public class Main {
                             if (giftChoice.equalsIgnoreCase("y")) {
                                 System.out.print("Enter your message: ");
                                 String message = scanner.nextLine();
-                                for (int i = 0; i < Integer.parseInt(quantityStr); i++){
+                                for (int i = 0; i < Integer.parseInt(quantityStr); i++) {
                                     ShoppingCart.cartList.get(activeCart).appendMessage(productName, message);
                                 }
-                                
+
                             } else if (giftChoice.equalsIgnoreCase("n")) {
                                 for (int i = 0; i < Integer.parseInt(quantityStr); i++){
                                     ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
@@ -182,19 +176,21 @@ public class Main {
                     System.out.print("Enter name of product you wish to view the message of: ");
                     String messageName = scanner.nextLine();
                     ShoppingCart.cartList.get(activeCart).retrieveMatchedPairs(messageName);
-                    ShoppingCart.cartList.get(activeCart).printAllMessagePairs(messageName);
+                    ShoppingCart.cartList.get(activeCart).printAllMessagePairs();
                     System.out.print("Enter the number of the message you wish to change: ");
-                    String messageChoice = scanner.nextLine();
+                    String messageChoice;
+                    while (true) {
+                        messageChoice = scanner.nextLine();
+                        if (messageChoice.matches("^\\d+$") && 0 < Integer.parseInt(messageChoice) && Integer.
+                                parseInt(messageChoice) <= ShoppingCart.cartList.get(activeCart).matchedList.size()) {
+                            break;
+                        }
+                        System.out.print("Invalid input. Please try again: ");
+                    }
                     System.out.print("Enter its new message: ");
                     String messageChange = scanner.nextLine();
-
                     ShoppingCart.cartList.get(activeCart).messageEdit(messageChoice, messageChange);
                     System.out.println(ShoppingCart.cartList.get(activeCart).messageList.get(0)[1]);
-                    break;
-                case "15":
-                    for (int i = 0; i < ShoppingCart.cartList.get(activeCart).messageList.size(); i++) {
-                        System.out.println(ShoppingCart.cartList.get(activeCart).messageList.get(i)[0] + " : " + ShoppingCart.cartList.get(activeCart).messageList.get(i)[1]);
-                    }
                     break;
                 default:
                     System.out.println("Invalid command.");

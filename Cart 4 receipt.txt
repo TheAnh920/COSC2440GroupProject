@@ -1,0 +1,7 @@
+Cart 4 - weight: 0.0
+
+Total amount (including shipping fee): 0.0
+Total tax: 0.0
+
+Total amount after tax: 0.0
+Date of purchase: Tue May 09 22:17:03 ICT 2023

@@ -4,6 +4,7 @@ package vn.edu.rmit.groupprj;
  * @author Group 21
  */
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -136,7 +137,7 @@ public abstract class Product {
         }
         double price = Math.round(Double.parseDouble(priceStr) * 100) / 100d;
 //      If the product is a physical product, ask user to input its weight
-        double weight = 0;
+        double weight = -1;
         if (type.equals("2")) {
             System.out.print("Input product weight: ");
             String weightStr;
@@ -197,6 +198,21 @@ public abstract class Product {
         } else {
             PhysicalGift pg = new PhysicalGift(name, desc, quantity, price, weight, taxType);
             catalogue.put(name, pg);
+        }
+//      Update the products.txt file
+        try {
+            FileOutputStream fos = new FileOutputStream("products.txt", true);
+            String productStr;
+            if (isGift.equalsIgnoreCase("N")) {
+                productStr = name + "|" + desc + "|" + quantity + "|" + price + "|" + weight + "|" + taxType + "|0\n";
+            } else {
+                productStr = name + "|" + desc + "|" + quantity + "|" + price + "|" + weight + "|" + taxType + "|1\n";
+            }
+            byte[] b = productStr.getBytes();
+            fos.write(b);
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         System.out.println("New product successfully added!");
     }
@@ -286,6 +302,35 @@ public abstract class Product {
                     }
                     break;
             }
+//          Rewrite the products.txt file with the updated product
+            try {
+                FileOutputStream fos = new FileOutputStream("products.txt");
+                String productStr;
+                for (Map.Entry<String, Product> pairEntry : catalogue.entrySet()) {
+                    if (pairEntry.getValue().getType().equals("DIGITAL") && !(pairEntry.getValue() instanceof CanBeGifted)) {
+                        productStr = pairEntry.getValue().pName + "|" + pairEntry.getValue().pDesc + "|" + pairEntry.
+                                getValue().pQuantity + "|" + pairEntry.getValue().pPrice + "|-1|" + pairEntry.getValue()
+                                .pTaxType + "|0\n";
+                    } else if (pairEntry.getValue().getType().equals("DIGITAL")) {
+                        productStr = pairEntry.getValue().pName + "|" + pairEntry.getValue().pDesc + "|" + pairEntry.
+                                getValue().pQuantity + "|" + pairEntry.getValue().pPrice + "|-1|" + pairEntry.getValue()
+                                .pTaxType + "|1\n";
+                    } else if (!(pairEntry.getValue() instanceof CanBeGifted)) {
+                        productStr = pairEntry.getValue().pName + "|" + pairEntry.getValue().pDesc + "|" + pairEntry.
+                                getValue().pQuantity + "|" + pairEntry.getValue().pPrice + "|" + ((PhysicalProduct)
+                                pairEntry.getValue()).getpWeight() + "|" + pairEntry.getValue().pTaxType + "|0\n";
+                    } else {
+                        productStr = pairEntry.getValue().pName + "|" + pairEntry.getValue().pDesc + "|" + pairEntry.
+                                getValue().pQuantity + "|" + pairEntry.getValue().pPrice + "|" + ((PhysicalProduct)
+                                pairEntry.getValue()).getpWeight() + "|" + pairEntry.getValue().pTaxType + "|1\n";
+                    }
+                    byte[] b = productStr.getBytes();
+                    fos.write(b);
+                }
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -346,18 +391,6 @@ public abstract class Product {
         }
     }
 
-    public static void generateProducts() {
-        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
-                100, 10, "Luxury tax"));
-        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100,
-                50, 0.7, "Normal tax"));
-        Product.catalogue.put("game", new DigitalGift("game", "Far Cry, an open-world FPS game", 100,
-                50, "Normal tax"));
-        Product.catalogue.put("flower", new PhysicalGift("flower", "A bouquet of black-jack flowers, also " +
-                "known as pig shit", 100, 10, 1, "Tax-free"));
-    }
-
-    // test
     public static void loadProducts() {
         Path file = Paths.get("products.txt");
         try (Stream<String> stream = Files.lines(file)) {
@@ -388,5 +421,4 @@ public abstract class Product {
             e.printStackTrace();
         }
     }
-    // end test
 }
