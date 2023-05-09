@@ -1,6 +1,6 @@
-Cart 1 - weight: 0.0
-{}
-Total amount (including shipping fee): 0.0
+Cart 1 - weight: 5.0
+{flower=4}
+Total amount (including shipping fee): 40.5
 Total tax: 0.0
-Total amount after tax: 0.0
-Date of purchase: Tue May 09 21:30:13 ICT 2023
+Total amount after tax: 40.5
+Date of purchase: Tue May 09 23:37:53 ICT 2023
