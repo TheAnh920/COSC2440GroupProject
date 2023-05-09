@@ -153,9 +153,6 @@ public class Main {
                 case "15":
                     ShoppingCart.cartList.get(activeCart).cartReceipt();
                     break;
-                case "16":
-
-                    break;
                 default:
                     System.out.println("Invalid command.");
             }

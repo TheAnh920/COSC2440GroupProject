@@ -4,16 +4,14 @@ package vn.edu.rmit.groupprj;
  * @author Group 21
  */
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-// test
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Stream;
-// end test
 
 public abstract class Product {
     static Map<String, Product> catalogue = new HashMap<>();
@@ -294,7 +292,8 @@ public abstract class Product {
     public static boolean displayAllProducts() {
 //      Loop through the HashMap and print out all products
         for (String productName : catalogue.keySet()) {
-            System.out.println(catalogue.get(productName).toString());
+            System.out.println(catalogue.get(productName).toString() + " - Price: " + catalogue.get(productName).
+                    getpPrice() + " - Quantity available: " + catalogue.get(productName).getpQuantity());
         }
         return true;
     }
@@ -304,7 +303,8 @@ public abstract class Product {
         for (String productName : catalogue.keySet()) {
 //          If there are products with their names containing the given name, print them out
             if (productName.contains(name)) {
-                System.out.println(catalogue.get(productName).toString());
+                System.out.println(catalogue.get(productName).toString() + " - Price: " + catalogue.get(productName).
+                        getpPrice() + " - Quantity available: " + catalogue.get(productName).getpQuantity());
                 found = true;
             }
         }
@@ -332,6 +332,7 @@ public abstract class Product {
             if (catalogue.get(name).getType().equals("PHYSICAL")) {
                 System.out.println("Weight: " + ((PhysicalProduct) catalogue.get(name)).getpWeight());
             }
+            System.out.println("Tax type: " + catalogue.get(name).getpTaxType());
             if (catalogue.get(name) instanceof CanBeGifted) {
                 System.out.println("This product can also be purchased as a gift!");
             }

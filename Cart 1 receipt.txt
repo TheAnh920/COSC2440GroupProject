@@ -1,6 +1,6 @@
-Cart 1 - weight: 0.0
-{game=2}
-Total amount: 100.0
-Total tax: 10.0
-Total amount after tax: 110.0
-Date of purchase: Tue May 09 12:50:02 ICT 2023
+Cart 1 - weight: 8.8
+{towel=12, Smartphone=1}
+Total amount: 1400.88
+Total tax: 220.0
+Total amount after tax: 1620.88
+Date of purchase: Tue May 09 18:42:07 ICT 2023
