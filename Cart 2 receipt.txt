@@ -1,0 +1,6 @@
+Cart 2 - weight: 0.0
+{album=10}
+Total amount (including shipping fee): 100.0
+Total tax: 20.0
+Total amount after tax: 120.0
+Date of purchase: Tue May 09 21:51:53 ICT 2023

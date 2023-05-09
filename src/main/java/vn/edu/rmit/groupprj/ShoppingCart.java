@@ -169,14 +169,17 @@ public class ShoppingCart {
             String receiptName = "Cart " + key + " receipt.txt";
             FileWriter writer = new FileWriter(receiptName);
             System.out.println("FileWriter object created successfully.");
-            writer.write("Cart " + key + " - weight: " + Math.round(weight * 100) / 100d + "\n");
-            writer.write(cart + "\n");
+            writer.write("Cart " + key + " - weight: " + Math.round(weight * 100) / 100d + "\n\n");
+            for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
+                writer.write(pairEntry.getKey() + " x " + pairEntry.getValue() + "   :   " + (Product.catalogue.get(pairEntry.getKey()).getpPrice() * pairEntry.getValue()) + "\n");
+            }
+                
             writer.write("Total amount (including shipping fee): " + cartAmount() + "\n");
             writer.write("Total tax: " + cartTax() + "\n");
             if (CouponController.isCouponAdded()) {
                 writer.write("Coupon: " + Main.amountOff);
             }
-            writer.write("Total amount after tax: " + (cartAmount() + cartTax()) + "\n");
+            writer.write("\nTotal amount after tax: " + (cartAmount() + cartTax()) + "\n");
             writer.write("Date of purchase: " + new Date() + "\n");
             writer.close();
             System.out.println("Receipt saved to Cart " + key + " receipt.txt");
