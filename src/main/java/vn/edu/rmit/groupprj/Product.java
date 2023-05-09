@@ -336,6 +336,8 @@ public abstract class Product {
             if (catalogue.get(name) instanceof CanBeGifted) {
                 System.out.println("This product can also be purchased as a gift!");
             }
+
+            
             return true;
         }
     }
