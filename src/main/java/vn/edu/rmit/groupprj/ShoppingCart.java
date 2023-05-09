@@ -83,11 +83,11 @@ public class ShoppingCart {
     public double cartTax() {
         double tax = 0;
         for (Map.Entry<String, Integer> pairEntry : cart.entrySet()) {
-            if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equals("luxury tax")) {
+            if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equalsIgnoreCase("Luxury tax")) {
                 tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * 0.2);
-            } else if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equals("normal tax")) {
+            } else if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equalsIgnoreCase("Normal tax")) {
                 tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * 0.1);
-            } else if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equals("Tax-free")) {
+            } else if (Product.catalogue.get(pairEntry.getKey()).getpTaxType().equalsIgnoreCase("Tax-free")) {
                 tax += (Product.catalogue.get(pairEntry.getKey()).getpPrice() * cart.get(pairEntry.getKey()) * 0);
             }
         }

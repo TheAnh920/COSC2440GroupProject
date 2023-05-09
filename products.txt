@@ -1,0 +1,5 @@
+Laptop|A portable computer|10|1000.00|2.5|Normal tax
+Smartphone|A mobile phone with advanced features|20|800.00|0.4|Luxury tax
+Headphones|A pair of speakers worn over the ears|15|150.00|0.3|Tax-free
+E-book|A digital book|30|10.00|0.0|Normal tax
+Monitor|A display screen for a computer|5|300.00|4.0|Luxury tax

@@ -7,6 +7,7 @@ package vn.edu.rmit.groupprj;
 import java.util.Map;
 import java.util.Scanner;
 
+
 public class Main {
     //  Declare a static variable activeCart to indicate the cart the user is interacting with
     static int activeCart;
@@ -19,6 +20,10 @@ public class Main {
                 "s3926080 - Nguyen Bao Minh\n" +
                 "s3928141 - Tran Viet Hoang\n" +
                 "s3926234 - Nguyen Cong Chinh");
+        // test
+        Product.loadProducts();
+        // end test
+
 //      Create a default cart for users first opening the program
         ShoppingCart.cartList.put(1, new ShoppingCart());
 //      Set the active cart to the newly created cart
