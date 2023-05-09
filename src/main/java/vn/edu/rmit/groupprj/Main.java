@@ -49,8 +49,9 @@ public class Main {
                     "9. Display all carts\n" +
                     "10. Create new product\n" +
                     "11. Edit a product\n" +
-                    "12. Test\n" +
+                    "12. Apply coupon to cart\n" +
                     "13. Cart's receipt\n" +
+                    "14. Test\n" +
                     "0. Exit");
             String option = scanner.nextLine();
             if (option.equals("0")) {
@@ -83,6 +84,19 @@ public class Main {
                         }
                         System.out.print("That is not a valid quantity. Please try again: ");
                     }
+                    if (Product.catalogue.get(productName) instanceof CanBeGifted) {
+                        System.out.println("Product can be used as a gift. Would you like to add a message?");
+                        System.out.println("Y: Yes");
+                        System.out.println("N: No");
+                        String giftChoice = scanner.nextLine();
+                        if (giftChoice.equalsIgnoreCase("y")) {
+                            System.out.print("Enter your message: ");
+                            String message = scanner.nextLine();
+                            ShoppingCart.cartList.get(activeCart).appendMessage(productName, message);
+                        } else if (giftChoice.equalsIgnoreCase("n")) {
+                            ShoppingCart.cartList.get(activeCart).appendMessage(productName, null);
+                        }
+                    }
                     if (ShoppingCart.cartList.get(activeCart).addItem(productName, Integer.parseInt(quantityStr))) {
                         System.out.println("Product added to cart successfully!");
                     } else {
@@ -104,7 +118,7 @@ public class Main {
                     }
                     System.out.println("\nTax: " + ShoppingCart.cartList.get(activeCart).cartTax());
                     if (CouponController.isCouponAdded()) {
-                        System.out.println("Coupon: " + amountOff);
+                        System.out.println("Coupon: -" + amountOff);
                     }
                     System.out.println("Cart " + ShoppingCart.cartList.get(activeCart).getKey() +
                             " total: " + (ShoppingCart.cartList.get(activeCart).cartAmount() + ShoppingCart.cartList.get(activeCart).cartTax() - amountOff));
@@ -153,6 +167,20 @@ public class Main {
                     break;
                 case "13":
                     ShoppingCart.cartList.get(activeCart).cartReceipt();
+                    break;
+                case "14":
+                    System.out.print("Enter name of product you wish to view the message of: ");
+                    
+                    String messageName = scanner.nextLine();
+                    ShoppingCart.cartList.get(activeCart).retrieveMatchedPairs(messageName);
+                    ShoppingCart.cartList.get(activeCart).printAllMessagePairs(messageName);
+                    System.out.print("Enter the number of the message you wish to change: ");
+                    String messageChoice = scanner.nextLine();
+                    System.out.print("Enter its new message: ");
+                    String messageChange = scanner.nextLine();
+
+                    ShoppingCart.cartList.get(activeCart).messageEdit(messageChoice, messageChange);
+                    System.out.println(ShoppingCart.cartList.get(activeCart).messageList.get(0)[1]);
                     break;
                 default:
                     System.out.println("Invalid command.");

@@ -5,8 +5,7 @@ package vn.edu.rmit.groupprj;
  */
 
 public interface CanBeGifted {
-
     void setMessage(String msg);
 
-    String getMessage();
+    String getMessage();       
 }
