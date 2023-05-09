@@ -7,6 +7,13 @@ package vn.edu.rmit.groupprj;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+// test
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.stream.Stream;
+// end test
 
 public abstract class Product {
     static Map<String, Product> catalogue = new HashMap<>();
@@ -250,4 +257,44 @@ public abstract class Product {
             return true;
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    public static void generateProducts() {
+        Product.catalogue.put("album", new DigitalProduct("album", "An album by Tyler the Creator",
+                100, 10, "luxury tax"));
+        Product.catalogue.put("towel", new PhysicalProduct("towel", "A towel for your home", 100,
+                50, 0.7, "normal tax"));
+        Product.catalogue.put("game", new DigitalGift("game", "Far Cry, an open-world FPS game", 100,
+                50, "normal tax"));
+        Product.catalogue.put("flower", new PhysicalGift("flower", "A bouquet of black-jack flowers, also " +
+                "known as pig shit", 100, 10, 1, "tax-free"));
+    }
+
+    // test
+    public static void loadProducts() {
+        Path file = Paths.get("products.txt");
+        try (Stream<String> stream = Files.lines(file)) {
+            stream.forEach(line -> {
+                String[] parts = line.split("\\|");
+                String name = parts[0];
+                String description = parts[1];
+                int quantity = Integer.parseInt(parts[2]);
+                double price = Double.parseDouble(parts[3]);
+                double weight = Double.parseDouble(parts[4]);
+                String taxType = parts[5];
+                if (weight == 0) {
+                    DigitalProduct dp = new DigitalProduct(name, description, quantity, price, taxType);
+                    catalogue.put(name, dp);
+                } else {
+                    PhysicalProduct pp = new PhysicalProduct(name, description, quantity, price, weight, taxType);
+                    catalogue.put(name, pp);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // end test
+>>>>>>> Stashed changes
 }
